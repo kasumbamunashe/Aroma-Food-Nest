@@ -27,10 +27,10 @@
             color: var(--text);
             overflow-x: hidden;
             scroll-behavior: smooth;
-            padding-top: 120px; /* For fixed header */
+            padding-top: 90px;
         }
 
-        /* -- ENHANCED HEADER -- */
+        /* -- HEADER -- */
         header {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                         url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
@@ -72,7 +72,15 @@
             animation: fadeInDown 1.5s ease;
         }
 
-        /* -- ENHANCED NAVIGATION -- */
+        .tagline {
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            animation: fadeIn 2s ease;
+        }
+
+        /* -- NAVIGATION -- */
         nav {
             position: fixed;
             top: 0;
@@ -128,21 +136,7 @@
             width: 100%;
         }
 
-
-
-        .marquee {
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            animation: marquee 20s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* -- ENHANCED SECTIONS -- */
+        /* -- SECTIONS -- */
         section {
             padding: 6rem 2rem;
             position: relative;
@@ -171,7 +165,7 @@
             background: linear-gradient(to right, var(--gold), var(--accent));
         }
 
-        /* -- ENHANCED CUISINE CARDS -- */
+        /* -- CUISINE CARDS -- */
         .cuisine-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -231,7 +225,7 @@
             transition: all 0.3s ease;
         }
 
-        /* -- ENHANCED PACKAGES -- */
+        /* -- PACKAGES -- */
         .package-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -283,7 +277,7 @@
             background: linear-gradient(to right, var(--gold), transparent);
         }
 
-        /* -- ENHANCED EVENT CARDS -- */
+        /* -- EVENT PACKAGES -- */
         .event-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -339,7 +333,61 @@
             color: var(--dark);
         }
 
-        /* -- ENHANCED CONTACT -- */
+        /* -- CANAPÉ NIGHTS -- */
+        #canapes {
+            background: #f5f5f5;
+        }
+
+        /* -- MEAL PREP STYLES -- */
+        .meal-prep-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .meal-prep-category {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .meal-prep-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .meal-prep-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .meal-prep-option:last-child {
+            border-bottom: none;
+        }
+
+        /* -- PRIVATE CHEF STYLES -- */
+        #private-chef {
+            background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+        }
+
+        .private-chef-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* -- CONTACT -- */
         #contact {
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
                         url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
@@ -394,7 +442,7 @@
             background: rgba(212,175,55,0.2);
         }
 
-        /* -- ENHANCED CTA BUTTON -- */
+        /* -- CTA BUTTON -- */
         .cta-button {
             display: inline-flex;
             align-items: center;
@@ -452,12 +500,7 @@
             box-shadow: 0 5px 20px rgba(212, 175, 55, 0.6);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
-        }
-
-        /* -- ENHANCED FOOTER -- */
+        /* -- FOOTER -- */
         footer {
             background: var(--dark);
             color: white;
@@ -506,15 +549,15 @@
             100% { transform: scale(1); }
         }
 
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
         }
 
         /* -- RESPONSIVE -- */
         @media (max-width: 768px) {
             body {
-                padding-top: 100px;
+                padding-top: 80px;
             }
 
             .logo {
@@ -529,12 +572,7 @@
                 display: none;
             }
 
-            .seasonal-banner {
-                top: 60px;
-                font-size: 0.8rem;
-            }
-
-            .cuisine-grid, .package-grid, .event-grid {
+            .cuisine-grid, .package-grid, .event-grid, .meal-prep-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -546,30 +584,42 @@
                 clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
                 padding: 6rem 2rem;
             }
+
+            .meal-prep-option {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .meal-prep-option .price {
+                margin-top: 0.5rem;
+                align-self: flex-end;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- -- ENHANCED NAVIGATION -- -->
+    <!-- NAVIGATION -->
     <nav id="mainNav">
         <div class="nav-logo">Aroma Food Nest</div>
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#cuisines">Cuisines</a>
             <a href="#packages">Packages</a>
+            <a href="#canapes">Canapés</a>
+            <a href="#meal-prep">Meal Prep</a>
             <a href="#events">Events</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <!-- -- ENHANCED HERO -- -->
+    <!-- HERO SECTION -->
     <header>
         <h1 class="logo">Aroma Food Nest</h1>
         <p class="tagline">"Our Food Speaks to Your Hearts"</p>
         <a href="#contact" class="cta-button">Reserve Your Experience</a>
     </header>
 
-    <!-- -- ABOUT SECTION -- -->
+    <!-- ABOUT SECTION -->
     <section id="about">
         <h2 class="section-title">Our Culinary Philosophy</h2>
         <div class="cuisine-grid">
@@ -612,7 +662,7 @@
         </div>
     </section>
 
-    <!-- -- PACKAGES SECTION -- -->
+    <!-- PACKAGES SECTION -->
     <section id="packages" style="background: #f9f9f9;">
         <h2 class="section-title">Signature Packages</h2>
         <div class="package-grid">
@@ -652,9 +702,106 @@
         </div>
     </section>
 
-    <!-- -- EVENT PACKAGES -- -->
+    <!-- CANAPÉ NIGHTS SECTION -->
+    <section id="canapes">
+        <h2 class="section-title">Canapé Nights</h2>
+        <div class="package-grid">
+            <div class="package-card animate-on-scroll">
+                <h3>Intimate Gathering</h3>
+                <p><i class="fas fa-user-friends" style="color: var(--gold);"></i> Group of 5-10</p>
+                <div class="price">1800 AED</div>
+                <p>Elegant bite-sized creations for smaller events</p>
+                <div class="ingredient-icons" style="margin-top: 1rem;">
+                    <i class="fas fa-cocktail"></i>
+                    <i class="fas fa-shrimp"></i>
+                    <i class="fas fa-cheese"></i>
+                </div>
+            </div>
+            <div class="package-card animate-on-scroll">
+                <h3>Medium Gathering</h3>
+                <p><i class="fas fa-users" style="color: var(--gold);"></i> Group of 10-15</p>
+                <div class="price">2800 AED</div>
+                <p>Sophisticated canapé selection</p>
+                <div class="ingredient-icons" style="margin-top: 1rem;">
+                    <i class="fas fa-wine-glass-alt"></i>
+                    <i class="fas fa-bacon"></i>
+                    <i class="fas fa-bread-slice"></i>
+                </div>
+            </div>
+            <div class="package-card animate-on-scroll">
+                <h3>Grand Gathering</h3>
+                <p><i class="fas fa-users" style="color: var(--gold);"></i> Group of 15-20</p>
+                <div class="price">3800 AED</div>
+                <p>Premium canapé experience for larger events</p>
+                <div class="ingredient-icons" style="margin-top: 1rem;">
+                    <i class="fas fa-champagne-glasses"></i>
+                    <i class="fas fa-caviar"></i>
+                    <i class="fas fa-olive"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEAL PREP SECTION -->
+    <section id="meal-prep">
+        <h2 class="section-title">For Busy Homes & Professionals</h2>
+
+        <div class="meal-prep-grid">
+            <div class="meal-prep-category animate-on-scroll">
+                <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
+                    <i class="fas fa-clock" style="margin-right: 10px;"></i>Weekly Meal Prep
+                </h3>
+                <div class="meal-prep-option">
+                    <p><strong>2 times/week for 2 people</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">2800 AED/month</div>
+                </div>
+                <div class="meal-prep-option">
+                    <p><strong>2 times/week for 4 people</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3500 AED/month</div>
+                </div>
+            </div>
+
+            <div class="meal-prep-category animate-on-scroll">
+                <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
+                    <i class="fas fa-heartbeat" style="margin-right: 10px;"></i>Diet-Specific Plans
+                </h3>
+                <div class="meal-prep-option">
+                    <p><strong>Keto for 2 (3x/week)</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3000 AED/month</div>
+                </div>
+                <div class="meal-prep-option">
+                    <p><strong>Keto for 4 (3x/week)</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3800 AED/month</div>
+                </div>
+                <div class="meal-prep-option">
+                    <p><strong>Low-carb for 2 (2x/week)</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3000 AED/month</div>
+                </div>
+                <div class="meal-prep-option">
+                    <p><strong>Low-carb for 4 (2x/week)</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3800 AED/month</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIVATE CHEF SECTION -->
+    <section id="private-chef">
+        <h2 class="section-title">Private Chef Experience</h2>
+        <div class="private-chef-content animate-on-scroll">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Our private chef service offers a completely personalized dining experience tailored to your preferences.
+                Pricing varies based on menu complexity and number of courses.
+            </p>
+            <a href="#contact" class="cta-button" style="margin-top: 1rem;">
+                <i class="fas fa-utensils"></i> Request a Custom Menu
+            </a>
+        </div>
+    </section>
+
+    <!-- EVENT PACKAGES SECTION -->
     <section id="events">
-        <h2 class="section-title">Curated Events</h2>
+        <h2 class="section-title">Event Catering</h2>
         <div class="event-grid">
             <div class="event-card animate-on-scroll">
                 <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1533777324565-a040eb52facd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
@@ -698,7 +845,7 @@
         </div>
     </section>
 
-    <!-- -- ENHANCED CONTACT -- -->
+    <!-- CONTACT SECTION -->
     <section id="contact">
         <div class="contact-info">
             <h2>Ready for Your Culinary Experience?</h2>
@@ -714,21 +861,21 @@
         </div>
     </section>
 
-    <!-- -- FLOATING CTA -- -->
+    <!-- FLOATING CTA -->
     <div class="floating-cta animate-on-scroll">
         <a href="#contact" class="cta-button">
             <i class="fas fa-calendar-alt"></i> Book Now
         </a>
     </div>
 
-    <!-- -- ENHANCED FOOTER -- -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-logo">Aroma Food Nest</div>
         <p style="font-style: italic; margin-bottom: 1.5rem;">"Where every meal tells a story"</p>
         <p>&copy; 2025 Aroma Food Nest. All rights reserved.</p>
     </footer>
 
-    <!-- -- ENHANCED SCRIPTS -- -->
+    <!-- SCRIPTS -->
     <script>
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
