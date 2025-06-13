@@ -136,6 +136,70 @@
             width: 100%;
         }
 
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Mobile Side Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 250px;
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 80px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        }
+
+        .mobile-nav.open {
+            right: 0;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+        }
+
+        .mobile-nav a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
         /* -- SECTIONS -- */
         section {
             padding: 6rem 2rem;
@@ -336,6 +400,114 @@
         /* -- CANAPÉ NIGHTS -- */
         #canapes {
             background: #f5f5f5;
+        }
+
+        /* -- MENU ITEM STYLES -- */
+        .menu-section {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .menu-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--gold), var(--accent));
+        }
+
+        .menu-category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .menu-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--gold);
+        }
+
+        .menu-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item h4 i {
+            margin-right: 10px;
+            color: var(--gold);
+        }
+
+        .menu-item p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .menu-item .price-tag {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
         }
 
         /* -- MEAL PREP STYLES -- */
@@ -554,6 +726,39 @@
             50% { transform: translateY(-10px) rotate(5deg); }
         }
 
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* -- RESPONSIVE -- */
         @media (max-width: 768px) {
             body {
@@ -566,6 +771,11 @@
 
             .tagline {
                 font-size: 1.4rem;
+            }
+
+            /* Mobile Navigation Styles */
+            .mobile-menu-btn {
+                display: block;
             }
 
             .nav-links {
@@ -594,6 +804,14 @@
                 margin-top: 0.5rem;
                 align-self: flex-end;
             }
+
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-section {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
@@ -607,10 +825,33 @@
             <a href="#packages">Packages</a>
             <a href="#canapes">Canapés</a>
             <a href="#meal-prep">Meal Prep</a>
+            <a href="#breakfast">Breakfast</a>
+            <a href="#lunch">Lunch</a>
+            <a href="#dinner">Dinner</a>
             <a href="#events">Events</a>
             <a href="#contact">Contact</a>
         </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
+
+    <!-- Mobile Side Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#cuisines"><i class="fas fa-globe"></i> Cuisines</a>
+        <a href="#packages"><i class="fas fa-box-open"></i> Packages</a>
+        <a href="#canapes"><i class="fas fa-wine-glass"></i> Canapés</a>
+        <a href="#meal-prep"><i class="fas fa-utensils"></i> Meal Prep</a>
+        <a href="#breakfast"><i class="fas fa-sun"></i> Breakfast</a>
+        <a href="#lunch"><i class="fas fa-utensils"></i> Lunch</a>
+        <a href="#dinner"><i class="fas fa-moon"></i> Dinner</a>
+        <a href="#events"><i class="fas fa-calendar-alt"></i> Events</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
 
     <!-- HERO SECTION -->
     <header>
@@ -737,6 +978,126 @@
                     <i class="fas fa-champagne-glasses"></i>
                     <i class="fas fa-caviar"></i>
                     <i class="fas fa-olive"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BREAKFAST SECTION -->
+    <section id="breakfast" style="background: #f9f9f9;">
+        <h2 class="section-title">Breakfast Delights</h2>
+        <div class="menu-section animate-on-scroll">
+            <h3 class="menu-category-title"><i class="fas fa-sun"></i> Morning Specials</h3>
+            <div class="menu-items">
+                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
+                    <h4><i class="fas fa-egg"></i> Shakshouka</h4>
+                    <p>Poached eggs in a spiced tomato and pepper sauce with fresh herbs</p>
+                    <span class="price-tag">45 AED</span>
+                </div>
+                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
+                    <h4><i class="fas fa-bowl-food"></i> Soaked Oats with Berries</h4>
+                    <p>Creamy overnight oats with mixed berries, chia seeds, and honey</p>
+                    <span class="price-tag">35 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
+                    <h4><i class="fas fa-bread-slice"></i> Sourdough with Avocado</h4>
+                    <p>Artisan sourdough toast with smashed avocado, omelette or scrambled eggs</p>
+                    <span class="price-tag">50 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
+                    <h4><i class="fas fa-bacon"></i> English Breakfast</h4>
+                    <p>Classic full English with eggs, bacon, sausage, beans, mushrooms, and toast</p>
+                    <span class="price-tag">65 AED</span>
+                </div>
+                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
+                    <h4><i class="fas fa-sandwich"></i> Signature Sandwich</h4>
+                    <p>Toasted bread with cheese, egg, avocado, and fresh tomatoes</p>
+                    <span class="price-tag">40 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out 0.2s;">
+                    <h4><i class="fas fa-croissant"></i> Croissant Sandwich</h4>
+                    <p>Buttery croissant with lettuce, avocado, tomatoes, and your choice of filling</p>
+                    <span class="price-tag">45 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.4s;">
+                    <h4><i class="fas fa-pancakes"></i> Pancakes with Berries</h4>
+                    <p>Fluffy pancakes topped with mixed berries and maple syrup</p>
+                    <span class="price-tag">55 AED</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LUNCH SECTION -->
+    <section id="lunch">
+        <h2 class="section-title">Lunch Selections</h2>
+        <div class="menu-section animate-on-scroll">
+            <h3 class="menu-category-title"><i class="fas fa-utensils"></i> Midday Favorites</h3>
+            <div class="menu-items">
+                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
+                    <h4><i class="fas fa-steak"></i> Garlic & Herb Steak</h4>
+                    <p>Premium cut steak with garlic herb butter, mashed potatoes, and mushroom gravy</p>
+                    <span class="price-tag">120 AED</span>
+                </div>
+                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
+                    <h4><i class="fas fa-pasta"></i> Alfredo Pasta with Chicken</h4>
+                    <p>Creamy alfredo sauce with grilled chicken breast and parmesan</p>
+                    <span class="price-tag">85 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
+                    <h4><i class="fas fa-wok"></i> Chicken Stir Fry with Rice</h4>
+                    <p>Wok-tossed chicken with vegetables in our signature sauce, served with fried rice</p>
+                    <span class="price-tag">75 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
+                    <h4><i class="fas fa-fish"></i> Salmon with Asparagus</h4>
+                    <p>Pan-seared salmon fillet with roasted asparagus and lemon butter sauce</p>
+                    <span class="price-tag">110 AED</span>
+                </div>
+                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
+                    <h4><i class="fas fa-leaf"></i> Vitamin Salad</h4>
+                    <p>Fresh greens with avocado, nuts, berries, and our house vinaigrette</p>
+                    <span class="price-tag">65 AED</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DINNER SECTION -->
+    <section id="dinner" style="background: #f9f9f9;">
+        <h2 class="section-title">Evening Indulgences</h2>
+        <div class="menu-section animate-on-scroll">
+            <h3 class="menu-category-title"><i class="fas fa-moon"></i> Dinner Specialties</h3>
+            <div class="menu-items">
+                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
+                    <h4><i class="fas fa-pot-food"></i> Broccoli Beef Stew with Risotto</h4>
+                    <p>Tender beef slow-cooked with broccoli in rich sauce, served with creamy risotto</p>
+                    <span class="price-tag">95 AED</span>
+                </div>
+                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
+                    <h4><i class="fas fa-shrimp"></i> Creamy Garlic Shrimp & Pumpkin</h4>
+                    <p>Succulent shrimp in garlic cream sauce with roasted pumpkin</p>
+                    <span class="price-tag">105 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
+                    <h4><i class="fas fa-spaghetti"></i> Bolognese</h4>
+                    <p>Classic spaghetti with our slow-cooked meat sauce and parmesan</p>
+                    <span class="price-tag">80 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
+                    <h4><i class="fas fa-corn"></i> Corn Salad</h4>
+                    <p>Fresh corn with cherry tomatoes, feta, and herb dressing</p>
+                    <span class="price-tag">55 AED</span>
+                </div>
+                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
+                    <h4><i class="fas fa-salad"></i> Mixed Lettuce Salad</h4>
+                    <p>Seasonal greens with our selection of fresh vegetables</p>
+                    <span class="price-tag">50 AED</span>
+                </div>
+                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out 0.2s;">
+                    <h4><i class="fas fa-nut"></i> Walnut Lettuce Salad</h4>
+                    <p>Crisp lettuce with walnuts, apples, and balsamic glaze</p>
+                    <span class="price-tag">60 AED</span>
                 </div>
             </div>
         </div>
@@ -877,6 +1238,29 @@
 
     <!-- SCRIPTS -->
     <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -902,7 +1286,7 @@
         });
 
         // 3D tilt effect for cards
-        document.querySelectorAll('.package-card, .cuisine-card, .event-card').forEach(card => {
+        document.querySelectorAll('.package-card, .cuisine-card, .event-card, .menu-item').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -950,6 +1334,11 @@
             button.addEventListener('mouseleave', () => {
                 button.style.transform = 'translateY(0) scale(1)';
             });
+        });
+
+        // Animate menu items sequentially
+        document.querySelectorAll('.menu-item').forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
         });
     </script>
 </body>
