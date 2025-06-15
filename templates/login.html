@@ -1,0 +1,339 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login - Aroma Food Nest{% endblock %}
+
+{% block content %}
+<div class="login-container animate-on-scroll">
+    <div class="login-header">
+        <h1 class="login-title">
+            <i class="fas fa-lock" style="margin-right: 15px;"></i>Admin Portal
+        </h1>
+        <div class="login-logo">
+            <div class="logo-circle">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <span>Aroma Food Nest</span>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('login') }}" class="login-form">
+        <div class="form-group">
+            <label for="username">
+                <i class="fas fa-user" style="margin-right: 8px;"></i>Username
+            </label>
+            <div class="input-with-icon">
+                <input type="text" id="username" name="username" required>
+                <i class="fas fa-envelope input-icon"></i>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">
+                <i class="fas fa-key" style="margin-right: 8px;"></i>Password
+            </label>
+            <div class="input-with-icon">
+                <input type="password" id="password" name="password" required>
+                <i class="fas fa-lock input-icon"></i>
+                <span class="toggle-password" onclick="togglePasswordVisibility()">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-login">
+                <i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i>Login
+            </button>
+        </div>
+
+        <div class="login-footer">
+            <p>For authorized personnel only</p>
+            <div class="security-info">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secure Admin Portal</span>
+            </div>
+        </div>
+        <div class="back-to-site">
+        <a href="/" class="btn btn-gold" aria-label="Return to main website">
+            <i class="fas fa-home"></i> Back to Main Site
+        </a>
+    </div>
+    </form>
+</div>
+
+<style>
+    .login-container {
+        max-width: 500px;
+        margin: 5rem auto;
+        padding: 3rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--gold), var(--accent));
+    }
+    .back-to-site {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .btn-gold {
+        background: var(--gold);
+        color: var(--dark);
+        padding: 0.8rem 1.75rem;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        min-width: 200px;
+    }
+
+    .btn-gold:hover, .btn-gold:focus {
+        background: #e0b52b;
+        transform: translateY(-2px);
+        color: var(--dark);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        outline: none;
+    }
+
+    .btn-gold:active {
+        transform: translateY(0);
+    }
+
+    .btn-gold i {
+        font-size: 1.1em;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-gold:hover i {
+        transform: translateX(-3px);
+    }
+
+    /* Animation */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .login-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+        background: linear-gradient(to right, var(--gold), #f4d03f);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+        display: inline-block;
+    }
+
+    .login-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, var(--gold), var(--accent));
+    }
+
+    .login-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.5rem;
+        color: var(--dark);
+        font-weight: 600;
+    }
+
+    .logo-circle {
+        width: 40px;
+        height: 40px;
+        background: var(--gold);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+
+    .login-form {
+        margin-top: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.8rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+    }
+
+    .input-with-icon {
+        position: relative;
+    }
+
+    .input-with-icon input {
+        width: 100%;
+        padding: 1rem 1rem 1rem 3rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        background: var(--light);
+    }
+
+    .input-with-icon input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        outline: none;
+        background: white;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gold);
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .toggle-password:hover {
+        color: var(--gold);
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        background: linear-gradient(to right, var(--gold), #f4d03f);
+        border: none;
+        color: var(--dark);
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-login:hover {
+        background: linear-gradient(to right, var(--accent), #d43d3d);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(197, 61, 61, 0.3);
+    }
+
+    .login-footer {
+        margin-top: 2.5rem;
+        text-align: center;
+        color: #777;
+        font-size: 0.9rem;
+    }
+
+    .security-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+        color: var(--gold);
+        font-weight: 600;
+    }
+
+    .security-info i {
+        margin-right: 8px;
+    }
+
+    /* Animation */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    // Password visibility toggle
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.querySelector('.toggle-password i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    }
+
+    // Animation on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginContainer = document.querySelector('.animate-on-scroll');
+
+        // Trigger animation
+        setTimeout(() => {
+            loginContainer.classList.add('visible');
+        }, 100);
+
+        // Add keyboard listener for form submission
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (document.activeElement.id === 'username' ||
+                                      document.activeElement.id === 'password')) {
+                document.querySelector('.btn-login').click();
+            }
+        });
+    });
+</script>
+{% endblock %}

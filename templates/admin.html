@@ -1,0 +1,933 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Aroma Food Nest{% endblock %}
+
+{% block content %}
+<div class="admin-container animate-on-scroll">
+    <div class="admin-header">
+        <div>
+            <h1><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h1>
+            <p class="admin-subtitle">Manage bookings and administrator accounts</p>
+        </div>
+        <div>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger" aria-label="Logout">
+                <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <div class="admin-sections">
+        <!-- Date Management Section -->
+        <div class="admin-section">
+            <div class="section-header" onclick="toggleSection('datesSection')" role="button" aria-expanded="false" aria-controls="datesSection">
+                <h2><i class="fas fa-calendar-times"></i> Unavailable Dates</h2>
+                <div class="section-actions">
+                    <i class="fas fa-chevron-down section-toggle"></i>
+                </div>
+            </div>
+
+            <div id="datesSection" class="section-content">
+                <div class="section-actions">
+                    <button class="btn btn-small" onclick="toggleDateForm(event)" aria-label="Add unavailable date">
+                        <i class="fas fa-plus"></i> Add Date
+                    </button>
+                </div>
+
+                <div id="dateForm" class="date-picker-container" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="datePicker"><i class="fas fa-calendar-day"></i> Date</label>
+                            <input type="date" id="datePicker" class="form-control" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateNotes"><i class="fas fa-sticky-note"></i> Notes</label>
+                            <input type="text" id="dateNotes" class="form-control" placeholder="Reason (optional)" aria-label="Date notes">
+                        </div>
+                    </div>
+                    <button onclick="bookDate()" class="btn btn-primary" aria-label="Save date as unavailable">
+                        <i class="fas fa-save"></i> Mark as Unavailable
+                    </button>
+                </div>
+
+                <div class="booked-dates-list">
+                    {% if booked_dates %}
+                        {% for booked_date in booked_dates %}
+                            <div class="booked-date-item">
+                                <div class="date-info">
+                                    <div class="date-display">
+                                        <i class="fas fa-calendar-day"></i>
+                                        <strong>{{ booked_date.date.strftime('%B %d, %Y') }}</strong>
+                                    </div>
+                                    {% if booked_date.notes %}
+                                    <div class="date-notes">
+                                        <i class="fas fa-info-circle"></i> {{ booked_date.notes }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <button onclick="unbookDate('{{ booked_date.date.strftime('%Y-%m-%d') }}')"
+                                        class="btn btn-danger btn-small"
+                                        aria-label="Make date available">
+                                    <i class="fas fa-calendar-check"></i> Make Available
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fas fa-calendar-check"></i>
+                            <p>No dates are currently marked as unavailable</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Management Section -->
+        <div class="admin-section">
+            <div class="section-header" onclick="toggleSection('adminsSection')" role="button" aria-expanded="false" aria-controls="adminsSection">
+                <h2><i class="fas fa-users-cog"></i> Administrator Accounts</h2>
+                <div class="section-actions">
+                    <i class="fas fa-chevron-down section-toggle"></i>
+                </div>
+            </div>
+
+            <div id="adminsSection" class="section-content">
+                <div class="section-actions">
+                    <button class="btn btn-small" onclick="toggleAdminForm(event)" aria-label="Add new administrator">
+                        <i class="fas fa-user-plus"></i> Add Admin
+                    </button>
+                </div>
+
+                <div id="adminForm" class="admin-form-container" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newUsername"><i class="fas fa-user"></i> Username</label>
+                            <input type="text" id="newUsername" class="form-control" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword"><i class="fas fa-key"></i> Password</label>
+                            <div class="password-input">
+                                <input type="password" id="newPassword" class="form-control" aria-required="true">
+                                <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('newPassword', this)" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="addAdmin()" class="btn btn-primary" aria-label="Create administrator account">
+                        <i class="fas fa-save"></i> Create Admin
+                    </button>
+                </div>
+
+                <div class="admin-list">
+                    <div class="admin-item header">
+                        <div>Username</div>
+                        <div>Actions</div>
+                    </div>
+                    <div class="admin-item">
+                        <div>
+                            <i class="fas fa-user-shield"></i> admin
+                        </div>
+                        <div class="admin-actions">
+                            <button class="btn btn-small btn-change-password" onclick="showChangePasswordForm('admin')" aria-label="Change password for admin">
+                                <i class="fas fa-key"></i> Change Password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Main Site Button -->
+    <div class="back-to-site">
+        <a href="/" class="btn btn-gold" aria-label="Return to main website">
+            <i class="fas fa-home"></i> Back to Main Site
+        </a>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div id="changePasswordModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Change Password for <span id="modalUsername"></span></h3>
+            <button type="button" class="close-modal" onclick="closeModal()" aria-label="Close modal">
+                &times;
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="currentPassword"><i class="fas fa-lock"></i> Current Password</label>
+                <div class="password-input">
+                    <input type="password" id="currentPassword" class="form-control" aria-required="true">
+                    <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('currentPassword', this)" aria-label="Toggle password visibility">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newPassword1"><i class="fas fa-key"></i> New Password</label>
+                <div class="password-input">
+                    <input type="password" id="newPassword1" class="form-control" aria-required="true">
+                    <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('newPassword1', this)" aria-label="Toggle password visibility">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newPassword2"><i class="fas fa-key"></i> Confirm New Password</label>
+                <div class="password-input">
+                    <input type="password" id="newPassword2" class="form-control" aria-required="true">
+                    <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('newPassword2', this)" aria-label="Toggle password visibility">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button onclick="changePassword()" class="btn btn-primary" aria-label="Update password">
+                    <i class="fas fa-save"></i> Update Password
+                </button>
+                <button onclick="closeModal()" class="btn btn-danger" aria-label="Cancel password change">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --gold: #D4AF37;
+        --dark: #1A1A1A;
+        --light: #F8F5F0;
+        --accent: #C53D3D;
+        --text: #333;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--light);
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    .admin-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .admin-header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        color: var(--dark);
+        background: linear-gradient(to right, var(--gold), #f4d03f);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .admin-subtitle {
+        color: #666;
+        font-size: 0.95rem;
+        margin-left: 2.1rem;
+    }
+
+    .admin-sections {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .admin-section {
+        background: var(--light);
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        overflow: hidden;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: white;
+    }
+
+    .section-header:hover {
+        background: rgba(212, 175, 55, 0.1);
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0;
+    }
+
+    .section-toggle {
+        transition: transform 0.3s ease;
+        color: var(--gold);
+    }
+
+    .section-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .section-content.expanded {
+        max-height: 2000px;
+        padding: 0 1.5rem 1.5rem;
+    }
+
+    .section-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        border: none;
+        text-decoration: none;
+    }
+
+    .btn-small {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        background: var(--gold);
+        color: var(--dark);
+    }
+
+    .btn-primary:hover {
+        background: #e0b52b;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-danger {
+        background: var(--accent);
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background: #a83232;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(197, 61, 61, 0.3);
+    }
+
+    .btn-change-password {
+        background: var(--gold);
+        color: var(--dark);
+    }
+
+    .date-picker-container, .admin-form-container {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+
+    .form-control:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        outline: none;
+    }
+
+    .password-input {
+        position: relative;
+    }
+
+    .password-input input {
+        padding-right: 2.5rem;
+    }
+
+    .toggle-password-btn {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0.5rem;
+        border-radius: 50%;
+    }
+
+    .toggle-password-btn:hover {
+        background: rgba(0,0,0,0.05);
+        color: var(--gold);
+    }
+
+    .booked-dates-list, .admin-list {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .booked-date-item, .admin-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background: white;
+        border-bottom: 1px solid #eee;
+        transition: all 0.3s ease;
+    }
+
+    .admin-item.header {
+        background: var(--dark);
+        color: white;
+        font-weight: 600;
+    }
+
+    .booked-date-item:hover, .admin-item:not(.header):hover {
+        background: #f9f9f9;
+    }
+
+    .date-info {
+        flex: 1;
+    }
+
+    .date-display {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .date-notes {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+        color: #666;
+        margin-left: 1.5rem;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 2rem;
+        color: #999;
+    }
+
+    .empty-state i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #ddd;
+    }
+
+    .admin-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background-color: white;
+        margin: auto;
+        padding: 2rem;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        position: relative;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .modal-header h3 {
+        font-family: 'Playfair Display', serif;
+        color: var(--dark);
+    }
+
+    .close-modal {
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #999;
+        transition: all 0.3s ease;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+    }
+
+    .close-modal:hover {
+        color: var(--accent);
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    /* Back to Site Button */
+    .back-to-site {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .btn-gold {
+        background: var(--gold);
+        color: var(--dark);
+        padding: 0.8rem 1.75rem;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        min-width: 200px;
+    }
+
+    .btn-gold:hover, .btn-gold:focus {
+        background: #e0b52b;
+        transform: translateY(-2px);
+        color: var(--dark);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        outline: none;
+    }
+
+    .btn-gold:active {
+        transform: translateY(0);
+    }
+
+    .btn-gold i {
+        font-size: 1.1em;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-gold:hover i {
+        transform: translateX(-3px);
+    }
+
+    /* Animation */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .admin-container {
+            padding: 1.5rem;
+            margin: 1rem auto;
+        }
+
+        .admin-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .admin-header h1 {
+            font-size: 1.5rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .btn-gold {
+            width: 100%;
+            padding: 0.75rem;
+            min-width: auto;
+        }
+
+        .back-to-site {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+        }
+
+        .booked-date-item, .admin-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .admin-actions {
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .admin-container {
+            padding: 1rem;
+        }
+
+        .btn-gold {
+            font-size: 0.9rem;
+        }
+
+        .modal-content {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+    }
+</style>
+
+<script>
+    // Set default date to today
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const dateStr = today.toISOString().split('T')[0];
+        document.getElementById('datePicker').value = dateStr;
+        document.getElementById('datePicker').min = dateStr;
+
+        // Trigger animation
+        setTimeout(() => {
+            document.querySelector('.animate-on-scroll').classList.add('visible');
+        }, 100);
+
+        // Expand first section by default
+        toggleSection('datesSection', true);
+
+        // Focus management for accessibility
+        const modal = document.getElementById('changePasswordModal');
+        if (modal) {
+            modal.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        }
+    });
+
+    function toggleSection(sectionId, forceExpand = false) {
+        const section = document.getElementById(sectionId);
+        const header = section.previousElementSibling;
+        const toggleIcon = header.querySelector('.section-toggle');
+        const ariaExpanded = header.getAttribute('aria-expanded') === 'true';
+
+        if (forceExpand || ariaExpanded) {
+            section.classList.remove('expanded');
+            toggleIcon.classList.remove('fa-chevron-up');
+            toggleIcon.classList.add('fa-chevron-down');
+            header.setAttribute('aria-expanded', 'false');
+        } else {
+            section.classList.add('expanded');
+            toggleIcon.classList.remove('fa-chevron-down');
+            toggleIcon.classList.add('fa-chevron-up');
+            header.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleDateForm(event) {
+        event.stopPropagation();
+        const form = document.getElementById('dateForm');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleAdminForm(event) {
+        event.stopPropagation();
+        const form = document.getElementById('adminForm');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function togglePasswordVisibility(inputId, button) {
+        const input = document.getElementById(inputId);
+        const icon = button.querySelector('i');
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+            button.setAttribute('aria-label', 'Hide password');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+            button.setAttribute('aria-label', 'Show password');
+        }
+
+        // Focus the input after toggle for better UX
+        input.focus();
+    }
+
+    let lastFocusedElement;
+
+    function showChangePasswordForm(username) {
+        document.getElementById('modalUsername').textContent = username;
+        const modal = document.getElementById('changePasswordModal');
+        modal.style.display = 'flex';
+
+        // Save last focused element
+        lastFocusedElement = document.activeElement;
+
+        // Focus first input in modal
+        document.getElementById('currentPassword').focus();
+
+        // Trap focus inside modal
+        trapFocus(modal);
+    }
+
+    function closeModal() {
+        document.getElementById('changePasswordModal').style.display = 'none';
+
+        // Restore focus to last focused element
+        if (lastFocusedElement) {
+            lastFocusedElement.focus();
+        }
+    }
+
+    function trapFocus(modal) {
+        const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        modal.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
+        });
+    }
+
+    function bookDate() {
+        const dateInput = document.getElementById('datePicker');
+        const notesInput = document.getElementById('dateNotes');
+
+        if (!dateInput.value) {
+            alert('Please select a date');
+            return;
+        }
+
+        fetch('{{ url_for("book_date") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                date: dateInput.value,
+                notes: notesInput.value
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Date marked as unavailable successfully');
+                window.location.reload();
+            } else {
+                alert('Error: ' + (data.error || 'Failed to mark date'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred');
+        });
+    }
+
+    function unbookDate(dateStr) {
+        if (confirm('Are you sure you want to make this date available?')) {
+            fetch('{{ url_for("unbook_date") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    date: dateStr
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert('Error: ' + (data.error || 'Failed to update date'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred');
+            });
+        }
+    }
+
+    function addAdmin() {
+        const username = document.getElementById('newUsername').value;
+        const password = document.getElementById('newPassword').value;
+
+        if (!username || !password) {
+            alert('Please enter both username and password');
+            return;
+        }
+
+        fetch('{{ url_for("add_admin") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Admin account created successfully');
+                window.location.reload();
+            } else {
+                alert('Error: ' + (data.error || 'Failed to create admin account'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred');
+        });
+    }
+
+    function changePassword() {
+        const username = document.getElementById('modalUsername').textContent;
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword1 = document.getElementById('newPassword1').value;
+        const newPassword2 = document.getElementById('newPassword2').value;
+
+        if (!currentPassword || !newPassword1 || !newPassword2) {
+            alert('Please fill in all password fields');
+            return;
+        }
+
+        if (newPassword1 !== newPassword2) {
+            alert('New passwords do not match');
+            return;
+        }
+
+        fetch('{{ url_for("change_password") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                current_password: currentPassword,
+                new_password: newPassword1
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Password changed successfully');
+                closeModal();
+            } else {
+                alert('Error: ' + (data.error || 'Failed to change password'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred');
+        });
+    }
+</script>
+{% endblock %}

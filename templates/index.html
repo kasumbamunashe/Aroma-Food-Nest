@@ -13,6 +13,7 @@
             --light: #F8F5F0;
             --accent: #C53D3D;
             --text: #333;
+            --sidebar-width: 280px;
         }
 
         * {
@@ -28,6 +29,101 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             padding-top: 90px;
+            transition: padding-left 0.3s ease;
+        }
+
+        body.sidebar-open {
+            padding-left: var(--sidebar-width);
+        }
+
+        /* -- SIDE NAVIGATION -- */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 100px 20px 20px;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        .side-nav.open {
+            left: 0;
+        }
+
+        .side-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .side-nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .side-nav a:hover::before {
+            left: 100%;
+        }
+
+        .side-nav a:hover {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            transform: translateX(5px);
+        }
+
+        .side-nav a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .side-nav-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .side-nav-close {
+            position: absolute;
+            top: 25px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .side-nav-close:hover {
+            color: var(--gold);
+            transform: rotate(90deg);
         }
 
         /* -- HEADER -- */
@@ -136,8 +232,8 @@
             width: 100%;
         }
 
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
+        /* Menu Buttons */
+        .menu-btn {
             display: none;
             background: transparent;
             border: none;
@@ -145,6 +241,12 @@
             font-size: 1.8rem;
             cursor: pointer;
             z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            color: var(--gold);
+            transform: scale(1.1);
         }
 
         /* Mobile Side Navigation */
@@ -204,6 +306,8 @@
         section {
             padding: 6rem 2rem;
             position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .section-title {
@@ -781,6 +885,124 @@
             background: rgba(212,175,55,0.2);
         }
 
+        /* Calendar Styles */
+        .calendar-section {
+            padding: 6rem 2rem;
+            background: #f9f9f9;
+        }
+
+        .calendar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            background: linear-gradient(to right, var(--gold), #f4d03f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .calendar-nav button {
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-nav button:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .day-header {
+            text-align: center;
+            font-weight: 600;
+            padding: 0.5rem;
+            color: var(--gold);
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: #e8e8e8;
+        }
+
+        .calendar-day.empty {
+            background: transparent;
+        }
+
+        .calendar-day.today {
+            border: 2px solid var(--gold);
+        }
+
+        .calendar-day.booked {
+            background: #ffebee;
+            color: #b71c1c;
+        }
+
+        .calendar-day.booked::after {
+            content: "✕";
+            position: absolute;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        .admin-login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .admin-login-link a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .admin-login-link a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
         /* -- CTA BUTTON -- */
         .cta-button {
             display: inline-flex;
@@ -926,7 +1148,32 @@
             }
         }
 
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
         /* -- RESPONSIVE -- */
+        @media (min-width: 1024px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            body.sidebar-open {
+                padding-left: var(--sidebar-width);
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .side-nav {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
             body {
                 padding-top: 80px;
@@ -941,7 +1188,7 @@
             }
 
             /* Mobile Navigation Styles */
-            .mobile-menu-btn {
+            .menu-btn {
                 display: block;
             }
 
@@ -996,21 +1243,31 @@
     </style>
 </head>
 <body>
+    <!-- SIDE NAVIGATION -->
+    <nav class="side-nav" id="sideNav">
+        <div class="side-nav-logo">Aroma Food Nest</div>
+        <button class="side-nav-close" id="sideNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#cuisines"><i class="fas fa-globe"></i> Cuisines</a>
+        <a href="#packages"><i class="fas fa-box-open"></i> Packages</a>
+        <a href="#canapes"><i class="fas fa-wine-glass"></i> Canapés</a>
+        <a href="#meal-prep"><i class="fas fa-utensils"></i> Meal Prep</a>
+        <a href="#breakfast"><i class="fas fa-sun"></i> Breakfast</a>
+        <a href="#lunch"><i class="fas fa-utensils"></i> Lunch</a>
+        <a href="#dinner"><i class="fas fa-moon"></i> Dinner</a>
+        <a href="#events"><i class="fas fa-calendar-alt"></i> Events</a>
+        <a href="/calendar"><i class="fas fa-calendar-check"></i> Availability</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+
     <!-- NAVIGATION -->
     <nav id="mainNav">
+        <button class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
         <div class="nav-logo">Aroma Food Nest</div>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#cuisines">Cuisines</a>
-            <a href="#packages">Packages</a>
-            <a href="#canapes">Canapés</a>
-            <a href="#meal-prep">Meal Prep</a>
-            <a href="#breakfast">Breakfast</a>
-            <a href="#lunch">Lunch</a>
-            <a href="#dinner">Dinner</a>
-            <a href="#events">Events</a>
-            <a href="#contact">Contact</a>
-        </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn">
             <i class="fas fa-bars"></i>
         </button>
@@ -1030,6 +1287,7 @@
         <a href="#lunch"><i class="fas fa-utensils"></i> Lunch</a>
         <a href="#dinner"><i class="fas fa-moon"></i> Dinner</a>
         <a href="#events"><i class="fas fa-calendar-alt"></i> Events</a>
+        <a href="/calendar"><i class="fas fa-calendar-check"></i> Availability</a>
         <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
     </div>
 
@@ -1232,72 +1490,30 @@
                 <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
                     <h4><i class="fas fa-egg"></i> Shakshouka</h4>
                     <p>Poached eggs in a spiced tomato and pepper sauce with fresh herbs</p>
-                    <span class="price-tag">45 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Shakshouka"
-                            data-price="45">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
                     <h4><i class="fas fa-bowl-food"></i> Soaked Oats with Berries</h4>
                     <p>Creamy overnight oats with mixed berries, chia seeds, and honey</p>
-                    <span class="price-tag">35 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Soaked Oats with Berries"
-                            data-price="35">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
                     <h4><i class="fas fa-bread-slice"></i> Sourdough with Avocado</h4>
                     <p>Artisan sourdough toast with smashed avocado, omelette or scrambled eggs</p>
-                    <span class="price-tag">50 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Sourdough with Avocado"
-                            data-price="50">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
                     <h4><i class="fas fa-bacon"></i> English Breakfast</h4>
                     <p>Classic full English with eggs, bacon, sausage, beans, mushrooms, and toast</p>
-                    <span class="price-tag">65 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="English Breakfast"
-                            data-price="65">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
                     <h4><i class="fas fa-sandwich"></i> Signature Sandwich</h4>
                     <p>Toasted bread with cheese, egg, avocado, and fresh tomatoes</p>
-                    <span class="price-tag">40 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Signature Sandwich"
-                            data-price="40">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out 0.2s;">
                     <h4><i class="fas fa-croissant"></i> Croissant Sandwich</h4>
                     <p>Buttery croissant with lettuce, avocado, tomatoes, and your choice of filling</p>
-                    <span class="price-tag">45 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Croissant Sandwich"
-                            data-price="45">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.4s;">
                     <h4><i class="fas fa-pancakes"></i> Pancakes with Berries</h4>
                     <p>Fluffy pancakes topped with mixed berries and maple syrup</p>
-                    <span class="price-tag">55 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Pancakes with Berries"
-                            data-price="55">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
             </div>
         </div>
@@ -1312,52 +1528,22 @@
                 <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
                     <h4><i class="fas fa-steak"></i> Garlic & Herb Steak</h4>
                     <p>Premium cut steak with garlic herb butter, mashed potatoes, and mushroom gravy</p>
-                    <span class="price-tag">120 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Garlic & Herb Steak"
-                            data-price="120">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
                     <h4><i class="fas fa-pasta"></i> Alfredo Pasta with Chicken</h4>
                     <p>Creamy alfredo sauce with grilled chicken breast and parmesan</p>
-                    <span class="price-tag">85 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Alfredo Pasta with Chicken"
-                            data-price="85">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
                     <h4><i class="fas fa-wok"></i> Chicken Stir Fry with Rice</h4>
                     <p>Wok-tossed chicken with vegetables in our signature sauce, served with fried rice</p>
-                    <span class="price-tag">75 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Chicken Stir Fry with Rice"
-                            data-price="75">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
                     <h4><i class="fas fa-fish"></i> Salmon with Asparagus</h4>
                     <p>Pan-seared salmon fillet with roasted asparagus and lemon butter sauce</p>
-                    <span class="price-tag">110 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Salmon with Asparagus"
-                            data-price="110">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
                     <h4><i class="fas fa-leaf"></i> Vitamin Salad</h4>
                     <p>Fresh greens with avocado, nuts, berries, and our house vinaigrette</p>
-                    <span class="price-tag">65 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Vitamin Salad"
-                            data-price="65">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
             </div>
         </div>
@@ -1372,62 +1558,26 @@
                 <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
                     <h4><i class="fas fa-pot-food"></i> Broccoli Beef Stew with Risotto</h4>
                     <p>Tender beef slow-cooked with broccoli in rich sauce, served with creamy risotto</p>
-                    <span class="price-tag">95 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Broccoli Beef Stew with Risotto"
-                            data-price="95">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
                     <h4><i class="fas fa-shrimp"></i> Creamy Garlic Shrimp & Pumpkin</h4>
                     <p>Succulent shrimp in garlic cream sauce with roasted pumpkin</p>
-                    <span class="price-tag">105 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Creamy Garlic Shrimp & Pumpkin"
-                            data-price="105">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
                     <h4><i class="fas fa-spaghetti"></i> Bolognese</h4>
                     <p>Classic spaghetti with our slow-cooked meat sauce and parmesan</p>
-                    <span class="price-tag">80 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Bolognese"
-                            data-price="80">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
                     <h4><i class="fas fa-corn"></i> Corn Salad</h4>
                     <p>Fresh corn with cherry tomatoes, feta, and herb dressing</p>
-                    <span class="price-tag">55 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Corn Salad"
-                            data-price="55">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
                     <h4><i class="fas fa-salad"></i> Mixed Lettuce Salad</h4>
                     <p>Seasonal greens with our selection of fresh vegetables</p>
-                    <span class="price-tag">50 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Mixed Lettuce Salad"
-                            data-price="50">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
                 <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out 0.2s;">
                     <h4><i class="fas fa-nut"></i> Walnut Lettuce Salad</h4>
                     <p>Crisp lettuce with walnuts, apples, and balsamic glaze</p>
-                    <span class="price-tag">60 AED</span>
-                    <button class="cta-button add-to-cart" style="margin-top: 1rem; width: 100%;"
-                            data-name="Walnut Lettuce Salad"
-                            data-price="60">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
                 </div>
             </div>
         </div>
@@ -1520,6 +1670,7 @@
         </div>
     </section>
 
+
     <!-- EVENT PACKAGES SECTION -->
     <section id="events">
         <h2 class="section-title">Event Catering</h2>
@@ -1580,6 +1731,28 @@
             </div>
         </div>
     </section>
+    <!-- Add this new section to your HTML -->
+<section id="availability" class="calendar-section">
+    <h2 class="section-title">Booking Availability</h2>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h3 class="calendar-title">Available Dates</h3>
+            <div class="calendar-nav">
+                <button id="prevMonth" class="btn-gold">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button id="nextMonth" class="btn-gold">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        <div id="calendar"></div>
+        <div class="admin-login-link">
+            <a href="/admin"><i class="fas fa-lock"></i> Admin Login</a>
+        </div>
+    </div>
+</section>
+
 
     <!-- CONTACT SECTION -->
     <section id="contact">
@@ -1608,11 +1781,35 @@
     <footer>
         <div class="footer-logo">Aroma Food Nest</div>
         <p style="font-style: italic; margin-bottom: 1.5rem;">"Where every meal tells a story"</p>
-        <p>&copy; 2025 Aroma Food Nest. All rights reserved.</p>
+        <p>&copy; 2025 Aroma Food Nest. All rights reserved. | <a href="/admin" style="color: var(--gold);">Admin Login</a></p>
     </footer>
 
     <!-- SCRIPTS -->
     <script>
+        // Side navigation functionality
+        const menuBtn = document.getElementById('menuBtn');
+        const sideNav = document.getElementById('sideNav');
+        const sideNavClose = document.getElementById('sideNavClose');
+        const body = document.body;
+
+        menuBtn.addEventListener('click', () => {
+            sideNav.classList.add('open');
+            body.classList.add('sidebar-open');
+        });
+
+        sideNavClose.addEventListener('click', () => {
+            sideNav.classList.remove('open');
+            body.classList.remove('sidebar-open');
+        });
+
+        // Close side nav when clicking on a link
+        document.querySelectorAll('.side-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                sideNav.classList.remove('open');
+                body.classList.remove('sidebar-open');
+            });
+        });
+
         // Cart functionality
         let cart = [];
         const cartBtn = document.getElementById('cartBtn');
@@ -1814,12 +2011,15 @@
         });
 
         // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"], a[href^="/"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                // Only prevent default for hash links
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
@@ -1891,6 +2091,101 @@
         // Animate menu items sequentially
         document.querySelectorAll('.menu-item').forEach((item, index) => {
             item.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Calendar functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar');
+            const prevMonthBtn = document.getElementById('prevMonth');
+            const nextMonthBtn = document.getElementById('nextMonth');
+
+            let currentDate = new Date();
+            let currentYear = currentDate.getFullYear();
+            let currentMonth = currentDate.getMonth();
+
+            // Fetch booked dates from the backend
+            function fetchBookedDates() {
+                return fetch('/api/booked-dates')
+                    .then(response => response.json())
+                    .then(data => data.booked_dates)
+                    .catch(error => {
+                        console.error('Error fetching booked dates:', error);
+                        return [];
+                    });
+            }
+
+            // Generate calendar HTML
+            async function generateCalendar() {
+                const bookedDates = await fetchBookedDates();
+                const firstDay = new Date(currentYear, currentMonth, 1);
+                const lastDay = new Date(currentYear, currentMonth + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                const startingDay = firstDay.getDay();
+
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"];
+
+                // Update calendar title
+                document.querySelector('.calendar-title').textContent =
+                    `${monthNames[currentMonth]} ${currentYear}`;
+
+                let calendarHTML = `
+                    <div class="calendar-grid">
+                        <div class="day-header">Sun</div>
+                        <div class="day-header">Mon</div>
+                        <div class="day-header">Tue</div>
+                        <div class="day-header">Wed</div>
+                        <div class="day-header">Thu</div>
+                        <div class="day-header">Fri</div>
+                        <div class="day-header">Sat</div>
+                `;
+
+                // Empty cells for days before the first day of the month
+                for (let i = 0; i < startingDay; i++) {
+                    calendarHTML += `<div class="calendar-day empty"></div>`;
+                }
+
+                // Days of the month
+                const today = new Date();
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const isBooked = bookedDates.includes(dateStr);
+                    const isToday = today.getFullYear() === currentYear &&
+                                today.getMonth() === currentMonth &&
+                                today.getDate() === day;
+
+                    calendarHTML += `
+                        <div class="calendar-day ${isBooked ? 'booked' : ''} ${isToday ? 'today' : ''}">
+                            ${day}
+                        </div>
+                    `;
+                }
+
+                calendarHTML += `</div>`;
+                calendarEl.innerHTML = calendarHTML;
+            }
+
+            // Navigation buttons
+            prevMonthBtn.addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar();
+            });
+
+            nextMonthBtn.addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar();
+            });
+
+            // Initialize calendar
+            generateCalendar();
         });
     </script>
 </body>
