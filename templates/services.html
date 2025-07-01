@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma Food Nest | Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #1A1A1A;
+            --light: #F8F5F0;
+            --accent: #C53D3D;
+            --text: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-top: 90px;
+        }
+
+        /* Mobile Side Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 100px 20px 20px;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        .mobile-nav.open {
+            left: 0;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+        }
+
+        .mobile-nav a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .mobile-nav-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 25px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            background: linear-gradient(to right, var(--gold), #f4d03f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Package Cards */
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--gold);
+            text-align: center;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .package-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 1.5rem 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .price::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        /* Meal Prep Section */
+        .meal-prep-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .meal-prep-category {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .meal-prep-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .meal-prep-option:last-child {
+            border-bottom: none;
+        }
+
+        /* Private Chef Section */
+        #private-chef {
+            background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+        }
+
+        .private-chef-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .package-grid, .meal-prep-grid {
+                grid-template-columns: 1fr;
+            }
+            .meal-prep-option {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .meal-prep-option .price {
+                margin-top: 0.5rem;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-logo">Aroma Food Nest</div>
+        <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="{{ url_for('index')}}"><i class="fas fa-home"></i> Home</a>
+        <a href="{{url_for('menu')}}"><i class="fas fa-utensils"></i> Our Menu</a>
+        <a href="{{url_for('services')}}"><i class="fas fa-concierge-bell"></i> Services</a>
+        <a href="{{url_for('events')}}"><i class="fas fa-calendar-alt"></i> Events</a>
+         <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="mainNav">
+        <button class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-logo">Aroma Food Nest</div>
+    </nav>
+
+    <!-- Packages Section -->
+    <section id="packages">
+        <h2 class="section-title">Signature Packages</h2>
+        <div class="package-grid">
+            <div class="package-card">
+                <h3>Unity United</h3>
+                <p><i class="fas fa-user-friends" style="color: var(--gold);"></i> For 2 people</p>
+                <div class="price">450 AED</div>
+                <p>Chef-selected premium ingredients</p>
+                <div class="ingredient-icons" style="margin-top: 1rem;">
+                    <i class="fas fa-wine-bottle"></i>
+                    <i class="fas fa-bread-slice"></i>
+                    <i class="fas fa-fish"></i>
+                </div>
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-calendar-alt"></i> Book Now
+                </a>
+            </div>
+            <div class="package-card">
+                <h3>Team Quattro</h3>
+                <p><i class="fas fa-users" style="color: var(--gold);"></i> For 4 people</p>
+                <div class="price">685 AED</div>
+                <p>Perfect for family gatherings</p>
+                <div class="ingredient-icons" style="margin-top: 1rem;">
+                    <i class="fas fa-utensils"></i>
+                    <i class="fas fa-cheese"></i>
+                    <i class="fas fa-pepper-hot"></i>
+                </div>
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-calendar-alt"></i> Book Now
+                </a>
+            </div>
+            <div class="package-card">
+                <h3>The Super Six</h3>
+                <p><i class="fas fa-user-friends" style="color: var(--gold);"></i> For 6 people</p>
+                <div class="price">785 AED</div>
+                <p>Ideal for dinner parties</p>
+                <div class="ingredient-icons" style="margin-top: 1rem;">
+                    <i class="fas fa-glass-cheers"></i>
+                    <i class="fas fa-drumstick-bite"></i>
+                    <i class="fas fa-ice-cream"></i>
+                </div>
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-calendar-alt"></i> Book Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meal Prep Section -->
+    <section id="meal-prep" style="background: #f9f9f9;">
+        <h2 class="section-title">For Busy Homes & Professionals</h2>
+        <div class="meal-prep-grid">
+            <div class="meal-prep-category">
+                <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
+                    <i class="fas fa-clock" style="margin-right: 10px;"></i>Weekly Meal Prep
+                </h3>
+                <div class="meal-prep-option">
+                    <p><strong>2 times/week for 2 people</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">2800 AED/month</div>
+                </div>
+                <div class="meal-prep-option">
+                    <p><strong>2 times/week for 4 people</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3500 AED/month</div>
+                </div>
+                <a href="#contact" class="cta-button" style="width: 100%; text-align: center; justify-content: center;">
+                    <i class="fas fa-utensils"></i> Get Started
+                </a>
+            </div>
+
+            <div class="meal-prep-category">
+                <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
+                    <i class="fas fa-heartbeat" style="margin-right: 10px;"></i>Diet-Specific Plans
+                </h3>
+                <div class="meal-prep-option">
+                    <p><strong>Keto for 2 (3x/week)</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3000 AED/month</div>
+                </div>
+                <div class="meal-prep-option">
+                    <p><strong>Keto for 4 (3x/week)</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3800 AED/month</div>
+                </div>
+                <div class="meal-prep-option">
+                    <p><strong>Low-carb for 2 (2x/week)</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3000 AED/month</div>
+                </div>
+                <div class="meal-prep-option">
+                    <p><strong>Low-carb for 4 (2x/week)</strong></p>
+                    <div class="price" style="font-size: 1.8rem;">3800 AED/month</div>
+                </div>
+                <a href="#contact" class="cta-button" style="width: 100%; text-align: center; justify-content: center;">
+                    <i class="fas fa-utensils"></i> Get Started
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Chef Section -->
+    <section id="private-chef">
+        <h2 class="section-title">Private Chef Experience</h2>
+        <div class="private-chef-content">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Our private chef service offers a completely personalized dining experience tailored to your preferences.
+                Enjoy restaurant-quality meals in the comfort of your home with menus designed specifically for your tastes.
+            </p>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Pricing varies based on menu complexity and number of courses. Contact us to discuss your requirements
+                and we'll create a custom proposal for your private dining experience.
+            </p>
+            <a href="#contact" class="cta-button">
+                <i class="fas fa-utensils"></i> Request a Custom Menu
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: var(--dark); color: white; text-align: center;">
+        <h2 class="section-title" style="-webkit-text-fill-color: white; background: none;">Ready to Book Our Services?</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Contact us to discuss your needs and schedule your culinary experience
+        </p>
+        <a href="https://wa.me/971527055642" class="cta-button" style="background: var(--accent); color: white;">
+            <i class="fab fa-whatsapp"></i> WhatsApp Us
+        </a>
+    </section>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile navigation toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('open');
+        });
+
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+        });
+
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+            });
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(26, 26, 26, 0.98)';
+                nav.style.padding = '0.5rem 2rem';
+            } else {
+                nav.style.background = 'rgba(26, 26, 26, 0.95)';
+                nav.style.padding = '1rem 2rem';
+            }
+        });
+    </script>
+</body>
+</html>

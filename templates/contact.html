@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma Food Nest | Contact</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- SIDE NAVIGATION -->
+    <nav class="side-nav" id="sideNav">
+        <div class="side-nav-logo">Aroma Food Nest</div>
+        <button class="side-nav-close" id="sideNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+        <a href="menu.html"><i class="fas fa-utensils"></i> Menu</a>
+        <a href="packages.html"><i class="fas fa-box-open"></i> Packages</a>
+        <a href="meal-prep.html"><i class="fas fa-heartbeat"></i> Meal Prep</a>
+        <a href="private-chef.html"><i class="fas fa-chef-hat"></i> Private Chef</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+
+    <!-- NAVIGATION -->
+    <nav id="mainNav">
+        <button class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-logo">Aroma Food Nest</div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Side Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+        <a href="menu.html"><i class="fas fa-utensils"></i> Menu</a>
+        <a href="packages.html"><i class="fas fa-box-open"></i> Packages</a>
+        <a href="meal-prep.html"><i class="fas fa-heartbeat"></i> Meal Prep</a>
+        <a href="private-chef.html"><i class="fas fa-chef-hat"></i> Private Chef</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+
+    <!-- Shopping Cart -->
+    <div class="cart-container" id="cartContainer">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">Your cart is empty</div>
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotal">0 AED</span>
+        </div>
+        <div class="cart-actions">
+            <button class="cta-button" id="checkoutBtn" style="width: 100%;">
+                <i class="fab fa-whatsapp"></i> Send via WhatsApp
+            </button>
+            <button class="cta-button" id="clearCartBtn" style="width: 100%; background: #f5f5f5; color: var(--accent);">
+                <i class="fas fa-trash"></i> Clear Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Button -->
+    <div class="cart-btn" id="cartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <!-- CONTACT HERO SECTION -->
+    <header style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); height: 60vh;">
+        <h1 class="logo" style="font-size: 4rem;">Contact Us</h1>
+        <p class="tagline" style="font-size: 1.5rem;">"Let's create something delicious together"</p>
+    </header>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="contact-info">
+            <h2>Get In Touch</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">We'd love to hear from you! Whether you have questions about our services or want to book an event, our team is ready to assist you.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(5px);">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 1rem;">
+                        <i class="fas fa-phone" style="margin-right: 10px;"></i> Call Us
+                    </h3>
+                    <p style="font-size: 1.2rem;">+971 52 705 5642</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #ccc;">Available 9AM - 10PM daily</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(5px);">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 1rem;">
+                        <i class="fas fa-envelope" style="margin-right: 10px;"></i> Email Us
+                    </h3>
+                    <p style="font-size: 1.2rem;">info@aromafoodnest.com</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #ccc;">Response within 24 hours</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(5px);">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 1rem;">
+                        <i class="fab fa-whatsapp" style="margin-right: 10px;"></i> WhatsApp
+                    </h3>
+                    <p style="font-size: 1.2rem;">+971 52 705 5642</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #ccc;">Fastest response time</p>
+                </div>
+            </div>
+
+            <div class="social-links" style="margin: 2rem 0;">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <h3 style="font-family: 'Playfair Display', serif; margin: 2rem 0 1rem; color: white;">Send Us a Message</h3>
+            <form id="contactForm" style="max-width: 600px; margin: 0 auto;">
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="text" placeholder="Your Name" style="width: 100%; padding: 1rem; border-radius: 5px; border: none; background: rgba(255,255,255,0.2); color: white;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 1rem; border-radius: 5px; border: none; background: rgba(255,255,255,0.2); color: white;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="tel" placeholder="Your Phone" style="width: 100%; padding: 1rem; border-radius: 5px; border: none; background: rgba(255,255,255,0.2); color: white;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <select style="width: 100%; padding: 1rem; border-radius: 5px; border: none; background: rgba(255,255,255,0.2); color: white;">
+                        <option value="">Select Service</option>
+                        <option value="private-chef">Private Chef</option>
+                        <option value="meal-prep">Meal Prep</option>
+                        <option value="event-catering">Event Catering</option>
+                        <option value="other">Other Inquiry</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <textarea placeholder="Your Message" rows="5" style="width: 100%; padding: 1rem; border-radius: 5px; border: none; background: rgba(255,255,255,0.2); color: white;"></textarea>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section id="booking" class="calendar-section">
+        <h2 class="section-title">Booking Availability</h2>
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <h3 class="calendar-title">Available Dates</h3>
+                <div class="calendar-nav">
+                    <button id="prevMonth" class="btn-gold">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button id="nextMonth" class="btn-gold">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="calendar"></div>
+            <div class="admin-login-link">
+                <a href="/admin"><i class="fas fa-lock"></i> Admin Login</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">Aroma Food Nest</div>
+        <p style="font-style: italic; margin-bottom: 1.5rem;">"Where every meal tells a story"</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="menu.html">Menu</a>
+            <a href="packages.html">Packages</a>
+            <a href="contact.html">Contact</a>
+            <a href="/admin">Admin</a>
+        </div>
+        <div class="social-links" style="margin: 2rem 0;">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2025 Aroma Food Nest. All rights reserved.</p>
+    </footer>
+
+    <!-- FLOATING CTA -->
+    <div class="floating-cta animate-on-scroll">
+        <a href="tel:+971527055642" class="cta-button">
+            <i class="fas fa-phone"></i> Call Now
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

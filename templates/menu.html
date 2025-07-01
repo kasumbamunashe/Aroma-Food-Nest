@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma Food Nest | Our Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #1A1A1A;
+            --light: #F8F5F0;
+            --accent: #C53D3D;
+            --text: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-top: 90px;
+        }
+
+        /* Mobile Side Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 100px 20px 20px;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        .mobile-nav.open {
+            left: 0;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+        }
+
+        .mobile-nav a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .mobile-nav-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 25px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            background: linear-gradient(to right, var(--gold), #f4d03f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Menu Sections */
+        .menu-section {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--gold), var(--accent));
+        }
+
+        .menu-category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .menu-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--gold);
+        }
+
+        .menu-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item h4 i {
+            margin-right: 10px;
+            color: var(--gold);
+        }
+
+        .menu-item p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .menu-section {
+                padding: 2rem;
+            }
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-logo">Aroma Food Nest</div>
+        <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="{{ url_for('index')}}"><i class="fas fa-home"></i> Home</a>
+        <a href="{{url_for('menu')}}"><i class="fas fa-utensils"></i> Our Menu</a>
+        <a href="{{url_for('services')}}"><i class="fas fa-concierge-bell"></i> Services</a>
+        <a href="{{url_for('events')}}"><i class="fas fa-calendar-alt"></i> Events</a>
+         <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="mainNav">
+        <button class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-logo">Aroma Food Nest</div>
+    </nav>
+
+    <!-- Breakfast Section -->
+    <section id="breakfast">
+        <h2 class="section-title">Breakfast Delights</h2>
+        <div class="menu-section">
+            <h3 class="menu-category-title"><i class="fas fa-sun"></i> Morning Specials</h3>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <h4><i class="fas fa-egg"></i> Shakshouka</h4>
+                    <p>Poached eggs in a spiced tomato and pepper sauce with fresh herbs</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-bowl-food"></i> Soaked Oats with Berries</h4>
+                    <p>Creamy overnight oats with mixed berries, chia seeds, and honey</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-bread-slice"></i> Sourdough with Avocado</h4>
+                    <p>Artisan sourdough toast with smashed avocado, omelette or scrambled eggs</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-bacon"></i> English Breakfast</h4>
+                    <p>Classic full English with eggs, bacon, sausage, beans, mushrooms, and toast</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-sandwich"></i> Signature Sandwich</h4>
+                    <p>Toasted bread with cheese, egg, avocado, and fresh tomatoes</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-croissant"></i> Croissant Sandwich</h4>
+                    <p>Buttery croissant with lettuce, avocado, tomatoes, and your choice of filling</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-pancakes"></i> Pancakes with Berries</h4>
+                    <p>Fluffy pancakes topped with mixed berries and maple syrup</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lunch Section -->
+    <section id="lunch" style="background: #f9f9f9;">
+        <h2 class="section-title">Lunch Selections</h2>
+        <div class="menu-section">
+            <h3 class="menu-category-title"><i class="fas fa-utensils"></i> Midday Favorites</h3>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <h4><i class="fas fa-steak"></i> Garlic & Herb Steak</h4>
+                    <p>Premium cut steak with garlic herb butter, mashed potatoes, and mushroom gravy</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-pasta"></i> Alfredo Pasta with Chicken</h4>
+                    <p>Creamy alfredo sauce with grilled chicken breast and parmesan</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-wok"></i> Chicken Stir Fry with Rice</h4>
+                    <p>Wok-tossed chicken with vegetables in our signature sauce, served with fried rice</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-fish"></i> Salmon with Asparagus</h4>
+                    <p>Pan-seared salmon fillet with roasted asparagus and lemon butter sauce</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-leaf"></i> Vitamin Salad</h4>
+                    <p>Fresh greens with avocado, nuts, berries, and our house vinaigrette</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dinner Section -->
+    <section id="dinner">
+        <h2 class="section-title">Evening Indulgences</h2>
+        <div class="menu-section">
+            <h3 class="menu-category-title"><i class="fas fa-moon"></i> Dinner Specialties</h3>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <h4><i class="fas fa-pot-food"></i> Broccoli Beef Stew with Risotto</h4>
+                    <p>Tender beef slow-cooked with broccoli in rich sauce, served with creamy risotto</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-shrimp"></i> Creamy Garlic Shrimp & Pumpkin</h4>
+                    <p>Succulent shrimp in garlic cream sauce with roasted pumpkin</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-spaghetti"></i> Bolognese</h4>
+                    <p>Classic spaghetti with our slow-cooked meat sauce and parmesan</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-corn"></i> Corn Salad</h4>
+                    <p>Fresh corn with cherry tomatoes, feta, and herb dressing</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-salad"></i> Mixed Lettuce Salad</h4>
+                    <p>Seasonal greens with our selection of fresh vegetables</p>
+                </div>
+                <div class="menu-item">
+                    <h4><i class="fas fa-nut"></i> Walnut Lettuce Salad</h4>
+                    <p>Crisp lettuce with walnuts, apples, and balsamic glaze</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile navigation toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('open');
+        });
+
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+        });
+
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+            });
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(26, 26, 26, 0.98)';
+                nav.style.padding = '0.5rem 2rem';
+            } else {
+                nav.style.background = 'rgba(26, 26, 26, 0.95)';
+                nav.style.padding = '1rem 2rem';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -13,7 +13,6 @@
             --light: #F8F5F0;
             --accent: #C53D3D;
             --text: #333;
-            --sidebar-width: 280px;
         }
 
         * {
@@ -29,19 +28,14 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             padding-top: 90px;
-            transition: padding-left 0.3s ease;
         }
 
-        body.sidebar-open {
-            padding-left: var(--sidebar-width);
-        }
-
-        /* -- SIDE NAVIGATION -- */
-        .side-nav {
+        /* Mobile Side Navigation */
+        .mobile-nav {
             position: fixed;
             top: 0;
             left: -280px;
-            width: var(--sidebar-width);
+            width: 280px;
             height: 100vh;
             background: rgba(26, 26, 26, 0.98);
             backdrop-filter: blur(10px);
@@ -54,220 +48,8 @@
             overflow-y: auto;
         }
 
-        .side-nav.open {
-            left: 0;
-        }
-
-        .side-nav a {
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            margin: 5px 0;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .side-nav a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
-            transition: all 0.5s ease;
-        }
-
-        .side-nav a:hover::before {
-            left: 100%;
-        }
-
-        .side-nav a:hover {
-            background: rgba(212, 175, 55, 0.2);
-            color: var(--gold);
-            transform: translateX(5px);
-        }
-
-        .side-nav a i {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .side-nav-logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--gold);
-        }
-
-        .side-nav-close {
-            position: absolute;
-            top: 25px;
-            right: 20px;
-            color: white;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .side-nav-close:hover {
-            color: var(--gold);
-            transform: rotate(90deg);
-        }
-
-        /* -- HEADER -- */
-        header {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                        url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(transparent, var(--light));
-            z-index: 1;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, var(--gold), #f4d03f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeInDown 1.5s ease;
-        }
-
-        .tagline {
-            font-size: 1.8rem;
-            font-style: italic;
-            margin-bottom: 2rem;
-            max-width: 800px;
-            animation: fadeIn 2s ease;
-        }
-
-        /* -- NAVIGATION -- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            padding: 0.5rem 2rem;
-            background: rgba(26, 26, 26, 0.98);
-        }
-
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--gold);
-            transition: all 0.3s ease;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Menu Buttons */
-        .menu-btn {
-            display: none;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            z-index: 1001;
-            transition: all 0.3s ease;
-        }
-
-        .menu-btn:hover {
-            color: var(--gold);
-            transform: scale(1.1);
-        }
-
-        /* Mobile Side Navigation */
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 250px;
-            height: 100vh;
-            background: rgba(26, 26, 26, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            padding: 80px 20px 20px;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-        }
-
         .mobile-nav.open {
-            right: 0;
+            left: 0;
         }
 
         .mobile-nav a {
@@ -278,6 +60,8 @@
             border-radius: 5px;
             transition: all 0.3s ease;
             font-weight: 600;
+            display: flex;
+            align-items: center;
         }
 
         .mobile-nav a:hover {
@@ -291,9 +75,18 @@
             text-align: center;
         }
 
-        .mobile-nav-close {
+        .mobile-nav-logo {
             position: absolute;
             top: 20px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 25px;
             right: 20px;
             color: white;
             font-size: 1.5rem;
@@ -302,10 +95,71 @@
             cursor: pointer;
         }
 
-        /* -- SECTIONS -- */
+        /* Header */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--gold), #f4d03f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        /* Sections */
         section {
             padding: 6rem 2rem;
-            position: relative;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -316,24 +170,12 @@
             text-align: center;
             margin-bottom: 3rem;
             color: var(--dark);
-            position: relative;
             background: linear-gradient(to right, var(--gold), #f4d03f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(to right, var(--gold), var(--accent));
-        }
-
-        /* -- CUISINE CARDS -- */
+        /* Cuisine Cards */
         .cuisine-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -346,43 +188,18 @@
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative;
-            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .cuisine-img {
             height: 250px;
             background-size: cover;
             background-position: center;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative;
-        }
-
-        .cuisine-img::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(212,175,55,0.1), rgba(0,0,0,0.5));
-        }
-
-        .cuisine-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .cuisine-card:hover .cuisine-img {
-            transform: scale(1.05);
         }
 
         .cuisine-content {
             padding: 2rem;
-            position: relative;
-            z-index: 2;
         }
 
         .cuisine-content h3 {
@@ -390,504 +207,10 @@
             font-size: 1.8rem;
             margin-bottom: 1rem;
             color: var(--dark);
-            transition: all 0.3s ease;
         }
 
-        /* -- PACKAGES -- */
-        .package-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            perspective: 1000px;
-        }
-
-        .package-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            border-top: 5px solid var(--gold);
-            text-align: center;
-            transform-style: preserve-3d;
-        }
-
-        .package-card:hover {
-            transform: scale(1.03) rotateY(5deg);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .package-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .price {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin: 1.5rem 0;
-            position: relative;
-            display: inline-block;
-        }
-
-        .price::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, var(--gold), transparent);
-        }
-
-        /* -- EVENT PACKAGES -- */
-        .event-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .event-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            transform-style: preserve-3d;
-        }
-
-        .event-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .event-img {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative;
-        }
-
-        .event-img::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(212,175,55,0.1), rgba(0,0,0,0.5));
-        }
-
-        .event-card:hover .event-img {
-            transform: scale(1.05);
-        }
-
-        .event-content {
-            padding: 2rem;
-        }
-
-        .event-content h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        /* -- CANAPÉ NIGHTS -- */
-        #canapes {
-            background: #f5f5f5;
-        }
-
-        /* -- MENU ITEM STYLES -- */
-        .menu-section {
-            background: white;
-            border-radius: 15px;
-            padding: 3rem;
-            margin: 2rem auto;
-            max-width: 1000px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .menu-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .menu-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--gold), var(--accent));
-        }
-
-        .menu-category-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .menu-category-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--gold), transparent);
-        }
-
-        .menu-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .menu-item {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--gold);
-        }
-
-        .menu-item h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .menu-item h4 i {
-            margin-right: 10px;
-            color: var(--gold);
-        }
-
-        .menu-item p {
-            font-size: 0.95rem;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .menu-item .price-tag {
-            display: inline-block;
-            background: var(--gold);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 0.8rem;
-        }
-
-        /* -- CART STYLES -- */
-        .cart-container {
-            position: fixed;
-            top: 90px;
-            right: 20px;
-            width: 350px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 999;
-            transform: translateX(120%);
-            transition: all 0.4s ease;
-            max-height: 70vh;
-            overflow-y: auto;
-            padding: 1.5rem;
-        }
-
-        .cart-container.open {
-            transform: translateX(0);
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-header h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--dark);
-        }
-
-        .cart-close {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--accent);
-        }
-
-        .cart-items {
-            margin-bottom: 1.5rem;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px dashed #eee;
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
-        }
-
-        .cart-item-name {
-            font-weight: 600;
-            flex: 1;
-        }
-
-        .cart-item-price {
-            color: var(--accent);
-            font-weight: 600;
-            margin: 0 1rem;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-        }
-
-        .cart-item-quantity button {
-            background: var(--gold);
-            color: white;
-            border: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .cart-item-quantity span {
-            margin: 0 0.5rem;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .cart-item-remove {
-            background: none;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            margin-left: 0.5rem;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin: 1.5rem 0;
-            padding-top: 1rem;
-            border-top: 2px solid var(--gold);
-        }
-
-        .cart-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .cart-empty {
-            text-align: center;
-            padding: 2rem 0;
-            color: #666;
-        }
-
-        /* -- CART BUTTON -- */
-        .cart-btn {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            z-index: 998;
-            background: var(--gold);
-            color: var(--dark);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cart-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--accent);
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        /* -- MEAL PREP STYLES -- */
-        .meal-prep-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .meal-prep-category {
-            background: white;
-            border-radius: 15px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-        }
-
-        .meal-prep-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .meal-prep-option {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px dashed #eee;
-        }
-
-        .meal-prep-option:last-child {
-            border-bottom: none;
-        }
-
-        /* -- PRIVATE CHEF STYLES -- */
-        #private-chef {
-            background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
-        }
-
-        .private-chef-content {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        /* -- CONTACT -- */
-        #contact {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 8rem 2rem;
-            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
-            margin-top: 4rem;
-        }
-
-        .contact-info {
-            max-width: 800px;
-            margin: 0 auto;
-            transform: translateY(-20px);
-        }
-
-        .contact-info h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(to right, var(--gold), #f4d03f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.8rem;
-            transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-        }
-
-        .social-links a:hover {
-            color: var(--gold);
-            transform: translateY(-5px) scale(1.1);
-            background: rgba(212,175,55,0.2);
-        }
-
-        /* Calendar Styles */
+        /* Booking Calendar */
         .calendar-section {
-            padding: 6rem 2rem;
             background: #f9f9f9;
         }
 
@@ -904,12 +227,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .calendar-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--dark);
             background: linear-gradient(to right, var(--gold), #f4d03f);
             -webkit-background-clip: text;
@@ -918,16 +241,17 @@
 
         .calendar-nav {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
         .calendar-nav button {
             background: var(--gold);
             color: var(--dark);
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
             cursor: pointer;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
 
@@ -955,22 +279,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--light);
             border-radius: 10px;
-            transition: all 0.3s ease;
             position: relative;
-        }
-
-        .calendar-day:hover {
-            background: #e8e8e8;
+            transition: all 0.3s ease;
         }
 
         .calendar-day.empty {
             background: transparent;
         }
 
-        .calendar-day.today {
-            border: 2px solid var(--gold);
+        .calendar-day.available {
+            background: #e8f5e9;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        .calendar-day.available:hover {
+            background: #c8e6c9;
+            transform: scale(1.05);
         }
 
         .calendar-day.booked {
@@ -978,12 +304,42 @@
             color: #b71c1c;
         }
 
-        .calendar-day.booked::after {
-            content: "✕";
+        .calendar-day.today {
+            border: 2px solid var(--gold);
+        }
+
+        .booked-icon {
             position: absolute;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--accent);
-            opacity: 0.7;
+            opacity: 0.8;
+        }
+
+        /* Booking Notice Styles */
+        .booking-notice {
+            background: #fff8f8;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 5px 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .booking-notice i {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .booking-notice p {
+            margin: 0;
+            color: var(--dark);
+        }
+
+        .booked-symbol {
+            color: var(--accent);
+            font-weight: bold;
         }
 
         .admin-login-link {
@@ -1000,10 +356,71 @@
 
         .admin-login-link a:hover {
             color: var(--accent);
-            text-decoration: underline;
         }
 
-        /* -- CTA BUTTON -- */
+        /* Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .summary-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            padding: 0 1.5rem;
+        }
+
+        .summary-card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            padding: 0 1.5rem;
+        }
+
+        .summary-card a {
+            display: inline-flex;
+            align-items: center;
+            color: var(--gold);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .summary-card a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .summary-card a i {
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* CTA Button */
         .cta-button {
             display: inline-flex;
             align-items: center;
@@ -1012,72 +429,21 @@
             padding: 1.2rem 2.5rem;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 1.1rem;
             text-decoration: none;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-            animation: pulse 2s infinite;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            z-index: 1;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, var(--gold), var(--accent));
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .cta-button:hover::before {
-            opacity: 1;
+            transition: all 0.3s ease;
         }
 
         .cta-button:hover {
-            color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(197, 61, 61, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* -- FLOATING CTA -- */
-        .floating-cta {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 999;
-            animation: float 3s ease-in-out infinite;
-            transform-origin: center;
-        }
-
-        .floating-cta .cta-button {
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.6);
-        }
-
-        /* -- FOOTER -- */
+        /* Footer */
         footer {
             background: var(--dark);
             color: white;
             text-align: center;
             padding: 4rem 2rem;
-            position: relative;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(to right, var(--gold), var(--accent));
         }
 
         .footer-logo {
@@ -1087,252 +453,67 @@
             margin-bottom: 1.5rem;
         }
 
-        /* -- ANIMATIONS -- */
+        /* Animation */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
-        }
-
-        @keyframes slideInFromLeft {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInFromRight {
-            0% {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        /* -- RESPONSIVE -- */
-        @media (min-width: 1024px) {
-            .menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            body.sidebar-open {
-                padding-left: var(--sidebar-width);
-            }
-        }
-
-        @media (max-width: 1023px) {
-            .side-nav {
-                display: none;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            body {
-                padding-top: 80px;
-            }
-
             .logo {
                 font-size: 3.5rem;
             }
-
             .tagline {
                 font-size: 1.4rem;
             }
-
-            /* Mobile Navigation Styles */
-            .menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .cuisine-grid, .package-grid, .event-grid, .meal-prep-grid {
-                grid-template-columns: 1fr;
-            }
-
             .section-title {
                 font-size: 2.5rem;
             }
-
-            #contact {
-                clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
-                padding: 6rem 2rem;
+            .calendar-grid {
+                grid-template-columns: repeat(7, 1fr);
             }
-
-            .meal-prep-option {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .meal-prep-option .price {
-                margin-top: 0.5rem;
-                align-self: flex-end;
-            }
-
-            .menu-items {
-                grid-template-columns: 1fr;
-            }
-
-            .menu-section {
-                padding: 2rem;
-            }
-
-            .cart-container {
-                width: 90%;
-                right: 5%;
-            }
-
-            .cart-btn {
-                bottom: 70px;
-                right: 15px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
+            .calendar-nav button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- SIDE NAVIGATION -->
-    <nav class="side-nav" id="sideNav">
-        <div class="side-nav-logo">Aroma Food Nest</div>
-        <button class="side-nav-close" id="sideNavClose">
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-logo">Aroma Food Nest</div>
+        <button class="mobile-nav-close" id="mobileNavClose">
             <i class="fas fa-times"></i>
         </button>
-        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
-        <a href="#cuisines"><i class="fas fa-globe"></i> Cuisines</a>
-        <a href="#packages"><i class="fas fa-box-open"></i> Packages</a>
-        <a href="#canapes"><i class="fas fa-wine-glass"></i> Canapés</a>
-        <a href="#meal-prep"><i class="fas fa-utensils"></i> Meal Prep</a>
-        <a href="#breakfast"><i class="fas fa-sun"></i> Breakfast</a>
-        <a href="#lunch"><i class="fas fa-utensils"></i> Lunch</a>
-        <a href="#dinner"><i class="fas fa-moon"></i> Dinner</a>
-        <a href="#events"><i class="fas fa-calendar-alt"></i> Events</a>
-        <a href="/calendar"><i class="fas fa-calendar-check"></i> Availability</a>
-        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-    </nav>
+        <a href="{{ url_for('index')}}"><i class="fas fa-home"></i> Home</a>
+        <a href="{{url_for('menu')}}"><i class="fas fa-utensils"></i> Our Menu</a>
+        <a href="{{url_for('services')}}"><i class="fas fa-concierge-bell"></i> Services</a>
+        <a href="{{url_for('events')}}"><i class="fas fa-calendar-alt"></i> Events</a>
+         <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
 
-    <!-- NAVIGATION -->
+    <!-- Navigation -->
     <nav id="mainNav">
         <button class="menu-btn" id="menuBtn">
             <i class="fas fa-bars"></i>
         </button>
         <div class="nav-logo">Aroma Food Nest</div>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
     </nav>
 
-    <!-- Mobile Side Navigation -->
-    <div class="mobile-nav" id="mobileNav">
-        <button class="mobile-nav-close" id="mobileNavClose">
-            <i class="fas fa-times"></i>
-        </button>
-        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
-        <a href="#cuisines"><i class="fas fa-globe"></i> Cuisines</a>
-        <a href="#packages"><i class="fas fa-box-open"></i> Packages</a>
-        <a href="#canapes"><i class="fas fa-wine-glass"></i> Canapés</a>
-        <a href="#meal-prep"><i class="fas fa-utensils"></i> Meal Prep</a>
-        <a href="#breakfast"><i class="fas fa-sun"></i> Breakfast</a>
-        <a href="#lunch"><i class="fas fa-utensils"></i> Lunch</a>
-        <a href="#dinner"><i class="fas fa-moon"></i> Dinner</a>
-        <a href="#events"><i class="fas fa-calendar-alt"></i> Events</a>
-        <a href="/calendar"><i class="fas fa-calendar-check"></i> Availability</a>
-        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-    </div>
-
-    <!-- Shopping Cart -->
-    <div class="cart-container" id="cartContainer">
-        <div class="cart-header">
-            <h3>Your Order</h3>
-            <button class="cart-close" id="cartClose">&times;</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <!-- Cart items will be added here dynamically -->
-            <div class="cart-empty">Your cart is empty</div>
-        </div>
-        <div class="cart-total">
-            <span>Total:</span>
-            <span id="cartTotal">0 AED</span>
-        </div>
-        <div class="cart-actions">
-            <button class="cta-button" id="checkoutBtn" style="width: 100%;">
-                <i class="fab fa-whatsapp"></i> Send via WhatsApp
-            </button>
-            <button class="cta-button" id="clearCartBtn" style="width: 100%; background: #f5f5f5; color: var(--accent);">
-                <i class="fas fa-trash"></i> Clear Cart
-            </button>
-        </div>
-    </div>
-
-    <!-- Cart Button -->
-    <div class="cart-btn" id="cartBtn">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count" id="cartCount">0</span>
-    </div>
-
-    <!-- HERO SECTION -->
+    <!-- Hero Section -->
     <header>
         <h1 class="logo">Aroma Food Nest</h1>
         <p class="tagline">"Our Food Speaks to Your Hearts"</p>
-        <a href="#contact" class="cta-button">Reserve Your Experience</a>
+        <a href="#booking" class="cta-button">Book Your Experience</a>
     </header>
 
-    <!-- ABOUT SECTION -->
+    <!-- About Section -->
     <section id="about">
         <h2 class="section-title">Our Culinary Philosophy</h2>
         <div class="cuisine-grid">
-            <div class="cuisine-card animate-on-scroll">
+            <div class="cuisine-card">
                 <div class="cuisine-img" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                 <div class="cuisine-content">
                     <h3>Global Flavors</h3>
@@ -1342,9 +523,10 @@
                         <i class="fas fa-cheese" style="color: var(--gold); margin: 0 5px;"></i>
                         <i class="fas fa-leaf" style="color: green; margin: 0 5px;"></i>
                     </div>
+                    <a href="{{url_for('menu')}}">Explore Our Menu <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="cuisine-card animate-on-scroll">
+            <div class="cuisine-card">
                 <div class="cuisine-img" style="background-image: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                 <div class="cuisine-content">
                     <h3>Healthy Living</h3>
@@ -1354,9 +536,10 @@
                         <i class="fas fa-drumstick-bite" style="color: #8B4513; margin: 0 5px;"></i>
                         <i class="fas fa-apple-alt" style="color: red; margin: 0 5px;"></i>
                     </div>
+                    <a href="{{ url_for('services') }}#meal-prep">Meal Prep Plans <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="cuisine-card animate-on-scroll">
+            <div class="cuisine-card">
                 <div class="cuisine-img" style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                 <div class="cuisine-content">
                     <h3>Event Excellence</h3>
@@ -1366,736 +549,137 @@
                         <i class="fas fa-utensils" style="color: #666; margin: 0 5px;"></i>
                         <i class="fas fa-crown" style="color: var(--gold); margin: 0 5px;"></i>
                     </div>
+                    <a href="{{url_for('events')}}">Event Packages <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PACKAGES SECTION -->
-    <section id="packages" style="background: #f9f9f9;">
-        <h2 class="section-title">Signature Packages</h2>
-        <div class="package-grid">
-            <div class="package-card animate-on-scroll">
-                <h3>Unity United</h3>
-                <p><i class="fas fa-user-friends" style="color: var(--gold);"></i> For 2 people</p>
-                <div class="price">450 AED</div>
-                <p>Chef-selected premium ingredients</p>
-                <div class="ingredient-icons" style="margin-top: 1rem;">
-                    <i class="fas fa-wine-bottle"></i>
-                    <i class="fas fa-bread-slice"></i>
-                    <i class="fas fa-fish"></i>
+    <!-- Services Preview -->
+    <section id="services" style="background: #f9f9f9;">
+        <h2 class="section-title">Our Services</h2>
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div>
+                    <h3>Signature Packages</h3>
+                    <p>Perfectly curated meals for 2-6 people, featuring chef-selected premium ingredients and balanced nutrition.</p>
+                    <a href="{{ url_for('services') }}#packages">View Packages <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                        data-name="Unity United Package"
-                        data-price="450">
-                    <i class="fas fa-cart-plus"></i> Add to Order
-                </button>
             </div>
-            <div class="package-card animate-on-scroll">
-                <h3>Team Quattro</h3>
-                <p><i class="fas fa-users" style="color: var(--gold);"></i> For 4 people</p>
-                <div class="price">685 AED</div>
-                <p>Perfect for family gatherings</p>
-                <div class="ingredient-icons" style="margin-top: 1rem;">
-                    <i class="fas fa-utensils"></i>
-                    <i class="fas fa-cheese"></i>
-                    <i class="fas fa-pepper-hot"></i>
+            <div class="summary-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div>
+                    <h3>Private Chef</h3>
+                    <p>A completely personalized dining experience tailored to your preferences, right in your home.</p>
+                    <a href="{{ url_for('services') }}#private-chef">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                        data-name="Team Quattro Package"
-                        data-price="685">
-                    <i class="fas fa-cart-plus"></i> Add to Order
-                </button>
             </div>
-            <div class="package-card animate-on-scroll">
-                <h3>The Super Six</h3>
-                <p><i class="fas fa-user-friends" style="color: var(--gold);"></i> For 6 people</p>
-                <div class="price">785 AED</div>
-                <p>Ideal for dinner parties</p>
-                <div class="ingredient-icons" style="margin-top: 1rem;">
-                    <i class="fas fa-glass-cheers"></i>
-                    <i class="fas fa-drumstick-bite"></i>
-                    <i class="fas fa-ice-cream"></i>
-                </div>
-                <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                        data-name="The Super Six Package"
-                        data-price="785">
-                    <i class="fas fa-cart-plus"></i> Add to Order
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- CANAPÉ NIGHTS SECTION -->
-    <section id="canapes">
-        <h2 class="section-title">Canapé Nights</h2>
-        <div class="package-grid">
-            <div class="package-card animate-on-scroll">
-                <h3>Intimate Gathering</h3>
-                <p><i class="fas fa-user-friends" style="color: var(--gold);"></i> Group of 5-10</p>
-                <div class="price">1800 AED</div>
-                <p>Elegant bite-sized creations for smaller events</p>
-                <div class="ingredient-icons" style="margin-top: 1rem;">
-                    <i class="fas fa-cocktail"></i>
-                    <i class="fas fa-shrimp"></i>
-                    <i class="fas fa-cheese"></i>
-                </div>
-                <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                        data-name="Intimate Gathering Canapés"
-                        data-price="1800">
-                    <i class="fas fa-cart-plus"></i> Add to Order
-                </button>
-            </div>
-            <div class="package-card animate-on-scroll">
-                <h3>Medium Gathering</h3>
-                <p><i class="fas fa-users" style="color: var(--gold);"></i> Group of 10-15</p>
-                <div class="price">2800 AED</div>
-                <p>Sophisticated canapé selection</p>
-                <div class="ingredient-icons" style="margin-top: 1rem;">
-                    <i class="fas fa-wine-glass-alt"></i>
-                    <i class="fas fa-bacon"></i>
-                    <i class="fas fa-bread-slice"></i>
-                </div>
-                <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                        data-name="Medium Gathering Canapés"
-                        data-price="2800">
-                    <i class="fas fa-cart-plus"></i> Add to Order
-                </button>
-            </div>
-            <div class="package-card animate-on-scroll">
-                <h3>Grand Gathering</h3>
-                <p><i class="fas fa-users" style="color: var(--gold);"></i> Group of 15-20</p>
-                <div class="price">3800 AED</div>
-                <p>Premium canapé experience for larger events</p>
-                <div class="ingredient-icons" style="margin-top: 1rem;">
-                    <i class="fas fa-champagne-glasses"></i>
-                    <i class="fas fa-caviar"></i>
-                    <i class="fas fa-olive"></i>
-                </div>
-                <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                        data-name="Grand Gathering Canapés"
-                        data-price="3800">
-                    <i class="fas fa-cart-plus"></i> Add to Order
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- BREAKFAST SECTION -->
-    <section id="breakfast" style="background: #f9f9f9;">
-        <h2 class="section-title">Breakfast Delights</h2>
-        <div class="menu-section animate-on-scroll">
-            <h3 class="menu-category-title"><i class="fas fa-sun"></i> Morning Specials</h3>
-            <div class="menu-items">
-                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
-                    <h4><i class="fas fa-egg"></i> Shakshouka</h4>
-                    <p>Poached eggs in a spiced tomato and pepper sauce with fresh herbs</p>
-                </div>
-                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
-                    <h4><i class="fas fa-bowl-food"></i> Soaked Oats with Berries</h4>
-                    <p>Creamy overnight oats with mixed berries, chia seeds, and honey</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
-                    <h4><i class="fas fa-bread-slice"></i> Sourdough with Avocado</h4>
-                    <p>Artisan sourdough toast with smashed avocado, omelette or scrambled eggs</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
-                    <h4><i class="fas fa-bacon"></i> English Breakfast</h4>
-                    <p>Classic full English with eggs, bacon, sausage, beans, mushrooms, and toast</p>
-                </div>
-                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
-                    <h4><i class="fas fa-sandwich"></i> Signature Sandwich</h4>
-                    <p>Toasted bread with cheese, egg, avocado, and fresh tomatoes</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out 0.2s;">
-                    <h4><i class="fas fa-croissant"></i> Croissant Sandwich</h4>
-                    <p>Buttery croissant with lettuce, avocado, tomatoes, and your choice of filling</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.4s;">
-                    <h4><i class="fas fa-pancakes"></i> Pancakes with Berries</h4>
-                    <p>Fluffy pancakes topped with mixed berries and maple syrup</p>
+            <div class="summary-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div>
+                    <h3>Weekly Meal Prep</h3>
+                    <p>Healthy, delicious meals prepared for your busy week, with options for various dietary needs.</p>
+                    <a href="{{ url_for('services') }}#meal-prep">Explore Options <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- LUNCH SECTION -->
-    <section id="lunch">
-        <h2 class="section-title">Lunch Selections</h2>
-        <div class="menu-section animate-on-scroll">
-            <h3 class="menu-category-title"><i class="fas fa-utensils"></i> Midday Favorites</h3>
-            <div class="menu-items">
-                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
-                    <h4><i class="fas fa-steak"></i> Garlic & Herb Steak</h4>
-                    <p>Premium cut steak with garlic herb butter, mashed potatoes, and mushroom gravy</p>
+    <!-- Booking Section -->
+    <section id="booking" class="calendar-section">
+        <h2 class="section-title">Book Your Experience</h2>
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <h3 class="calendar-title">Availability Calendar</h3>
+                <div class="calendar-nav">
+                    <button id="prevMonth">Previous</button>
+                    <button id="nextMonth">Next</button>
                 </div>
-                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
-                    <h4><i class="fas fa-pasta"></i> Alfredo Pasta with Chicken</h4>
-                    <p>Creamy alfredo sauce with grilled chicken breast and parmesan</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
-                    <h4><i class="fas fa-wok"></i> Chicken Stir Fry with Rice</h4>
-                    <p>Wok-tossed chicken with vegetables in our signature sauce, served with fried rice</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
-                    <h4><i class="fas fa-fish"></i> Salmon with Asparagus</h4>
-                    <p>Pan-seared salmon fillet with roasted asparagus and lemon butter sauce</p>
-                </div>
-                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
-                    <h4><i class="fas fa-leaf"></i> Vitamin Salad</h4>
-                    <p>Fresh greens with avocado, nuts, berries, and our house vinaigrette</p>
-                </div>
+            </div>
+
+            <!-- Booking Notice -->
+            <div class="booking-notice">
+                <i class="fas fa-info-circle"></i>
+                <p>
+                    <strong>Note:</strong> Dates marked with <span class="booked-symbol">✕</span> are fully booked.
+                    Please select an available date for your reservation.
+                </p>
+            </div>
+
+            <div id="calendar-container"></div>
+            <div class="admin-login-link">
+                <a href="/admin"><i class="fas fa-lock"></i> Admin Login</a>
             </div>
         </div>
     </section>
 
-    <!-- DINNER SECTION -->
-    <section id="dinner" style="background: #f9f9f9;">
-        <h2 class="section-title">Evening Indulgences</h2>
-        <div class="menu-section animate-on-scroll">
-            <h3 class="menu-category-title"><i class="fas fa-moon"></i> Dinner Specialties</h3>
-            <div class="menu-items">
-                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out;">
-                    <h4><i class="fas fa-pot-food"></i> Broccoli Beef Stew with Risotto</h4>
-                    <p>Tender beef slow-cooked with broccoli in rich sauce, served with creamy risotto</p>
-                </div>
-                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out;">
-                    <h4><i class="fas fa-shrimp"></i> Creamy Garlic Shrimp & Pumpkin</h4>
-                    <p>Succulent shrimp in garlic cream sauce with roasted pumpkin</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out;">
-                    <h4><i class="fas fa-spaghetti"></i> Bolognese</h4>
-                    <p>Classic spaghetti with our slow-cooked meat sauce and parmesan</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromLeft 0.8s ease-out 0.2s;">
-                    <h4><i class="fas fa-corn"></i> Corn Salad</h4>
-                    <p>Fresh corn with cherry tomatoes, feta, and herb dressing</p>
-                </div>
-                <div class="menu-item" style="animation: fadeInUp 0.8s ease-out 0.2s;">
-                    <h4><i class="fas fa-salad"></i> Mixed Lettuce Salad</h4>
-                    <p>Seasonal greens with our selection of fresh vegetables</p>
-                </div>
-                <div class="menu-item" style="animation: slideInFromRight 0.8s ease-out 0.2s;">
-                    <h4><i class="fas fa-nut"></i> Walnut Lettuce Salad</h4>
-                    <p>Crisp lettuce with walnuts, apples, and balsamic glaze</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MEAL PREP SECTION -->
-    <section id="meal-prep">
-        <h2 class="section-title">For Busy Homes & Professionals</h2>
-
-        <div class="meal-prep-grid">
-            <div class="meal-prep-category animate-on-scroll">
-                <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
-                    <i class="fas fa-clock" style="margin-right: 10px;"></i>Weekly Meal Prep
-                </h3>
-                <div class="meal-prep-option">
-                    <p><strong>2 times/week for 2 people</strong></p>
-                    <div class="price" style="font-size: 1.8rem;">2800 AED/month</div>
-                    <button class="cta-button add-to-cart" style="margin-top: 0.5rem; width: 100%;"
-                            data-name="Weekly Meal Prep (2x/wk for 2)"
-                            data-price="2800">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-                <div class="meal-prep-option">
-                    <p><strong>2 times/week for 4 people</strong></p>
-                    <div class="price" style="font-size: 1.8rem;">3500 AED/month</div>
-                    <button class="cta-button add-to-cart" style="margin-top: 0.5rem; width: 100%;"
-                            data-name="Weekly Meal Prep (2x/wk for 4)"
-                            data-price="3500">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-            </div>
-
-            <div class="meal-prep-category animate-on-scroll">
-                <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
-                    <i class="fas fa-heartbeat" style="margin-right: 10px;"></i>Diet-Specific Plans
-                </h3>
-                <div class="meal-prep-option">
-                    <p><strong>Keto for 2 (3x/week)</strong></p>
-                    <div class="price" style="font-size: 1.8rem;">3000 AED/month</div>
-                    <button class="cta-button add-to-cart" style="margin-top: 0.5rem; width: 100%;"
-                            data-name="Keto Meal Prep (3x/wk for 2)"
-                            data-price="3000">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-                <div class="meal-prep-option">
-                    <p><strong>Keto for 4 (3x/week)</strong></p>
-                    <div class="price" style="font-size: 1.8rem;">3800 AED/month</div>
-                    <button class="cta-button add-to-cart" style="margin-top: 0.5rem; width: 100%;"
-                            data-name="Keto Meal Prep (3x/wk for 4)"
-                            data-price="3800">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-                <div class="meal-prep-option">
-                    <p><strong>Low-carb for 2 (2x/week)</strong></p>
-                    <div class="price" style="font-size: 1.8rem;">3000 AED/month</div>
-                    <button class="cta-button add-to-cart" style="margin-top: 0.5rem; width: 100%;"
-                            data-name="Low-carb Meal Prep (2x/wk for 2)"
-                            data-price="3000">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-                <div class="meal-prep-option">
-                    <p><strong>Low-carb for 4 (2x/week)</strong></p>
-                    <div class="price" style="font-size: 1.8rem;">3800 AED/month</div>
-                    <button class="cta-button add-to-cart" style="margin-top: 0.5rem; width: 100%;"
-                            data-name="Low-carb Meal Prep (2x/wk for 4)"
-                            data-price="3800">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRIVATE CHEF SECTION -->
-    <section id="private-chef">
-        <h2 class="section-title">Private Chef Experience</h2>
-        <div class="private-chef-content animate-on-scroll">
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
-                Our private chef service offers a completely personalized dining experience tailored to your preferences.
-                Pricing varies based on menu complexity and number of courses.
-            </p>
-            <a href="#contact" class="cta-button" style="margin-top: 1rem;">
-                <i class="fas fa-utensils"></i> Request a Custom Menu
-            </a>
-        </div>
-    </section>
-
-
-    <!-- EVENT PACKAGES SECTION -->
-    <section id="events">
-        <h2 class="section-title">Event Catering</h2>
-        <div class="event-grid">
-            <div class="event-card animate-on-scroll">
-                <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1533777324565-a040eb52facd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                <div class="event-content">
-                    <h3>Italian Cuisine</h3>
-                    <div class="price">620 AED/person</div>
-                    <p>Authentic pastas, risottos, and antipasti</p>
-                    <div class="ingredient-icons" style="margin-top: 0.5rem;">
-                        <i class="fas fa-wine-bottle"></i>
-                        <i class="fas fa-cheese"></i>
-                        <i class="fas fa-wheat-awn"></i>
-                    </div>
-                    <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                            data-name="Italian Cuisine Catering (per person)"
-                            data-price="620">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-            </div>
-            <div class="event-card animate-on-scroll">
-                <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=800');"></div>
-                <div class="event-content">
-                    <h3>Mexican Cuisine</h3>
-                    <div class="price">750 AED/person</div>
-                    <p>Vibrant flavors of Mexico</p>
-                    <div class="ingredient-icons" style="margin-top: 0.5rem;">
-                        <i class="fas fa-pepper-hot"></i>
-                        <i class="fas fa-avocado"></i>
-                        <i class="fas fa-lime"></i>
-                    </div>
-                    <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                            data-name="Mexican Cuisine Catering (per person)"
-                            data-price="750">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-            </div>
-            <div class="event-card animate-on-scroll">
-                <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1558030006-450675393462?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                <div class="event-content">
-                    <h3>Barbecue</h3>
-                    <div class="price">500 AED/person</div>
-                    <p>Smoky, savory grilled specialties</p>
-                    <div class="ingredient-icons" style="margin-top: 0.5rem;">
-                        <i class="fas fa-drumstick-bite"></i>
-                        <i class="fas fa-fire"></i>
-                        <i class="fas fa-corn"></i>
-                    </div>
-                    <button class="cta-button add-to-cart" style="margin-top: 1.5rem; width: 100%;"
-                            data-name="Barbecue Catering (per person)"
-                            data-price="500">
-                        <i class="fas fa-cart-plus"></i> Add to Order
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Add this new section to your HTML -->
-<section id="availability" class="calendar-section">
-    <h2 class="section-title">Booking Availability</h2>
-    <div class="calendar-container">
-        <div class="calendar-header">
-            <h3 class="calendar-title">Available Dates</h3>
-            <div class="calendar-nav">
-                <button id="prevMonth" class="btn-gold">
-                    <i class="fas fa-chevron-left"></i> Previous
-                </button>
-                <button id="nextMonth" class="btn-gold">
-                    Next <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-        <div id="calendar"></div>
-        <div class="admin-login-link">
-            <a href="/admin"><i class="fas fa-lock"></i> Admin Login</a>
-        </div>
-    </div>
-</section>
-
-
-    <!-- CONTACT SECTION -->
-    <section id="contact">
-        <div class="contact-info">
-            <h2>Ready for Your Culinary Experience?</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Let's create unforgettable dining moments together</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <a href="https://wa.me/971527055642" class="cta-button" style="margin-top: 2rem;">
-                <i class="fab fa-whatsapp"></i> WhatsApp: 052 705 5642
-            </a>
-        </div>
-    </section>
-
-    <!-- FLOATING CTA -->
-    <div class="floating-cta animate-on-scroll">
-        <a href="#contact" class="cta-button">
-            <i class="fas fa-calendar-alt"></i> Book Now
+    <!-- Contact Section -->
+    <section id="contact" style="background: var(--dark); color: white; text-align: center;">
+        <h2 class="section-title" style="-webkit-text-fill-color: white; background: none;">Ready to Experience Aroma Food Nest?</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Contact us to discuss your culinary needs or to book our services
+        </p>
+        <a href="https://wa.me/971527055642" class="cta-button" style="background: var(--accent); color: white;">
+            <i class="fab fa-whatsapp"></i> WhatsApp Us
         </a>
-    </div>
+    </section>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer>
         <div class="footer-logo">Aroma Food Nest</div>
         <p style="font-style: italic; margin-bottom: 1.5rem;">"Where every meal tells a story"</p>
-        <p>&copy; 2025 Aroma Food Nest. All rights reserved. | <a href="/admin" style="color: var(--gold);">Admin Login</a></p>
+        <p>&copy; 2025 Aroma Food Nest. All rights reserved.</p>
     </footer>
 
-    <!-- SCRIPTS -->
     <script>
-        // Side navigation functionality
+        // Mobile navigation toggle
         const menuBtn = document.getElementById('menuBtn');
-        const sideNav = document.getElementById('sideNav');
-        const sideNavClose = document.getElementById('sideNavClose');
-        const body = document.body;
-
-        menuBtn.addEventListener('click', () => {
-            sideNav.classList.add('open');
-            body.classList.add('sidebar-open');
-        });
-
-        sideNavClose.addEventListener('click', () => {
-            sideNav.classList.remove('open');
-            body.classList.remove('sidebar-open');
-        });
-
-        // Close side nav when clicking on a link
-        document.querySelectorAll('.side-nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                sideNav.classList.remove('open');
-                body.classList.remove('sidebar-open');
-            });
-        });
-
-        // Cart functionality
-        let cart = [];
-        const cartBtn = document.getElementById('cartBtn');
-        const cartContainer = document.getElementById('cartContainer');
-        const cartClose = document.getElementById('cartClose');
-        const cartItems = document.getElementById('cartItems');
-        const cartCount = document.getElementById('cartCount');
-        const cartTotal = document.getElementById('cartTotal');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-        const clearCartBtn = document.getElementById('clearCartBtn');
-
-        // Initialize cart from localStorage if available
-        if (localStorage.getItem('cart')) {
-            cart = JSON.parse(localStorage.getItem('cart'));
-            updateCart();
-        }
-
-        // Toggle cart visibility
-        cartBtn.addEventListener('click', () => {
-            cartContainer.classList.toggle('open');
-        });
-
-        cartClose.addEventListener('click', () => {
-            cartContainer.classList.remove('open');
-        });
-
-        // Add to cart functionality
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const item = {
-                    name: e.target.dataset.name,
-                    price: parseFloat(e.target.dataset.price),
-                    quantity: 1
-                };
-
-                // Check if item already exists in cart
-                const existingItem = cart.find(cartItem => cartItem.name === item.name);
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push(item);
-                }
-
-                updateCart();
-                showAddedToCartMessage(item.name);
-                cartContainer.classList.add('open');
-            });
-        });
-
-        // Update cart display
-        function updateCart() {
-            // Save cart to localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            // Update cart count
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            cartCount.textContent = totalItems;
-
-            // Update cart items
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
-                checkoutBtn.style.display = 'none';
-                clearCartBtn.style.display = 'none';
-            } else {
-                cartItems.innerHTML = '';
-                cart.forEach((item, index) => {
-                    const cartItemElement = document.createElement('div');
-                    cartItemElement.className = 'cart-item';
-                    cartItemElement.innerHTML = `
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">${item.price} AED</div>
-                        <div class="cart-item-quantity">
-                            <button class="decrease-quantity" data-index="${index}">-</button>
-                            <span>${item.quantity}</span>
-                            <button class="increase-quantity" data-index="${index}">+</button>
-                        </div>
-                        <button class="cart-item-remove" data-index="${index}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    `;
-                    cartItems.appendChild(cartItemElement);
-                });
-
-                // Show checkout and clear buttons
-                checkoutBtn.style.display = 'block';
-                clearCartBtn.style.display = 'block';
-            }
-
-            // Update total
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotal.textContent = `${total} AED`;
-
-            // Add event listeners to quantity buttons
-            document.querySelectorAll('.increase-quantity').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const index = e.target.dataset.index;
-                    cart[index].quantity += 1;
-                    updateCart();
-                });
-            });
-
-            document.querySelectorAll('.decrease-quantity').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const index = e.target.dataset.index;
-                    if (cart[index].quantity > 1) {
-                        cart[index].quantity -= 1;
-                    } else {
-                        cart.splice(index, 1);
-                    }
-                    updateCart();
-                });
-            });
-
-            document.querySelectorAll('.cart-item-remove').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const index = e.target.dataset.index;
-                    cart.splice(index, 1);
-                    updateCart();
-                });
-            });
-        }
-
-        // Clear cart
-        clearCartBtn.addEventListener('click', () => {
-            cart = [];
-            updateCart();
-        });
-
-        // Checkout via WhatsApp
-        checkoutBtn.addEventListener('click', () => {
-            if (cart.length === 0) return;
-
-            let message = "Hello Aroma Food Nest! I'd like to place an order:\n\n";
-
-            cart.forEach(item => {
-                message += `- ${item.name} (${item.quantity}x) - ${item.price * item.quantity} AED\n`;
-            });
-
-            message += `\nTotal: ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)} AED`;
-            message += "\n\nPlease let me know if you need any additional information. Thank you!";
-
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/971527055642?text=${encodedMessage}`;
-
-            window.open(whatsappUrl, '_blank');
-        });
-
-        // Show "Added to cart" message
-        function showAddedToCartMessage(itemName) {
-            const notification = document.createElement('div');
-            notification.style.position = 'fixed';
-            notification.style.bottom = '20px';
-            notification.style.left = '50%';
-            notification.style.transform = 'translateX(-50%)';
-            notification.style.backgroundColor = 'var(--gold)';
-            notification.style.color = 'var(--dark)';
-            notification.style.padding = '10px 20px';
-            notification.style.borderRadius = '50px';
-            notification.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
-            notification.style.zIndex = '1000';
-            notification.style.fontWeight = '600';
-            notification.style.display = 'flex';
-            notification.style.alignItems = 'center';
-            notification.style.gap = '10px';
-            notification.innerHTML = `<i class="fas fa-check"></i> ${itemName} added to cart!`;
-
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.style.transition = 'all 0.3s ease';
-                notification.style.opacity = '0';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 2000);
-        }
-
-        // Mobile Navigation Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileNav = document.getElementById('mobileNav');
         const mobileNavClose = document.getElementById('mobileNavClose');
 
-        mobileMenuBtn.addEventListener('click', () => {
+        menuBtn.addEventListener('click', () => {
             mobileNav.classList.add('open');
-            document.body.style.overflow = 'hidden';
         });
 
         mobileNavClose.addEventListener('click', () => {
             mobileNav.classList.remove('open');
-            document.body.style.overflow = '';
         });
 
         // Close mobile nav when clicking on a link
         document.querySelectorAll('.mobile-nav a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileNav.classList.remove('open');
-                document.body.style.overflow = '';
             });
         });
 
         // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"], a[href^="/"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // Only prevent default for hash links
-                if (this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
 
-        // Scroll behavior for navigation
+        // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('mainNav');
             if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
+                nav.style.background = 'rgba(26, 26, 26, 0.98)';
+                nav.style.padding = '0.5rem 2rem';
             } else {
-                nav.classList.remove('scrolled');
+                nav.style.background = 'rgba(26, 26, 26, 0.95)';
+                nav.style.padding = '1rem 2rem';
             }
-
-            // Parallax effect for header
-            const scrollPosition = window.pageYOffset;
-            document.querySelector('header').style.backgroundPositionY = scrollPosition * 0.7 + 'px';
         });
 
-        // 3D tilt effect for cards
-        document.querySelectorAll('.package-card, .cuisine-card, .event-card, .menu-item').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const angleX = (y - centerY) / 20;
-                const angleY = (centerX - x) / 20;
-
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-        });
-
-        // Scroll animations
-        const animatedElements = document.querySelectorAll('.animate-on-scroll');
-        animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
-        });
-
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    scrollObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            scrollObserver.observe(el);
-        });
-
-        // Micro-interactions for buttons
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                button.style.transform = 'translateY(-5px) scale(1.05)';
-            });
-            button.addEventListener('mouseleave', () => {
-                button.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Animate menu items sequentially
-        document.querySelectorAll('.menu-item').forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.1}s`;
-        });
-
-        // Calendar functionality
+        // Calendar functionality - Backend-powered
         document.addEventListener('DOMContentLoaded', function() {
-            const calendarEl = document.getElementById('calendar');
+            const bookedDates = {{ booked_dates|tojson|safe }};
+
+            const calendarContainer = document.getElementById('calendar-container');
             const prevMonthBtn = document.getElementById('prevMonth');
             const nextMonthBtn = document.getElementById('nextMonth');
 
@@ -2103,31 +687,14 @@
             let currentYear = currentDate.getFullYear();
             let currentMonth = currentDate.getMonth();
 
-            // Fetch booked dates from the backend
-            function fetchBookedDates() {
-                return fetch('/api/booked-dates')
-                    .then(response => response.json())
-                    .then(data => data.booked_dates)
-                    .catch(error => {
-                        console.error('Error fetching booked dates:', error);
-                        return [];
-                    });
-            }
-
-            // Generate calendar HTML
-            async function generateCalendar() {
-                const bookedDates = await fetchBookedDates();
-                const firstDay = new Date(currentYear, currentMonth, 1);
-                const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            function generateCalendar(year, month) {
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
                 const daysInMonth = lastDay.getDate();
                 const startingDay = firstDay.getDay();
 
-                const monthNames = ["January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December"];
-
-                // Update calendar title
-                document.querySelector('.calendar-title').textContent =
-                    `${monthNames[currentMonth]} ${currentYear}`;
+                const today = new Date();
+                const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
 
                 let calendarHTML = `
                     <div class="calendar-grid">
@@ -2146,33 +713,46 @@
                 }
 
                 // Days of the month
-                const today = new Date();
                 for (let day = 1; day <= daysInMonth; day++) {
-                    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                     const isBooked = bookedDates.includes(dateStr);
-                    const isToday = today.getFullYear() === currentYear &&
-                                today.getMonth() === currentMonth &&
-                                today.getDate() === day;
+                    const isToday = isCurrentMonth && day === today.getDate();
 
                     calendarHTML += `
-                        <div class="calendar-day ${isBooked ? 'booked' : ''} ${isToday ? 'today' : ''}">
+                        <div class="calendar-day ${isBooked ? 'booked' : 'available'} ${isToday ? 'today' : ''}"
+                             data-date="${dateStr}">
                             ${day}
+                            ${isBooked ? '<span class="booked-icon">✕</span>' : ''}
                         </div>
                     `;
                 }
 
                 calendarHTML += `</div>`;
-                calendarEl.innerHTML = calendarHTML;
+                return calendarHTML;
             }
 
-            // Navigation buttons
+            function renderCalendar() {
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"];
+
+                calendarContainer.innerHTML = generateCalendar(currentYear, currentMonth);
+
+                // Add click handlers for available dates
+                document.querySelectorAll('.calendar-day.available').forEach(day => {
+                    day.addEventListener('click', function() {
+                        const date = this.getAttribute('data-date');
+                        window.location.href = `/booking?date=${date}`;
+                    });
+                });
+            }
+
             prevMonthBtn.addEventListener('click', function() {
                 currentMonth--;
                 if (currentMonth < 0) {
                     currentMonth = 11;
                     currentYear--;
                 }
-                generateCalendar();
+                renderCalendar();
             });
 
             nextMonthBtn.addEventListener('click', function() {
@@ -2181,11 +761,11 @@
                     currentMonth = 0;
                     currentYear++;
                 }
-                generateCalendar();
+                renderCalendar();
             });
 
-            // Initialize calendar
-            generateCalendar();
+            // Initial render
+            renderCalendar();
         });
     </script>
 </body>

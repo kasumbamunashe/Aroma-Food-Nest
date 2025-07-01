@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma Food Nest | About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- SIDE NAVIGATION -->
+    <nav class="side-nav" id="sideNav">
+        <div class="side-nav-logo">Aroma Food Nest</div>
+        <button class="side-nav-close" id="sideNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+        <a href="menu.html"><i class="fas fa-utensils"></i> Menu</a>
+        <a href="packages.html"><i class="fas fa-box-open"></i> Packages</a>
+        <a href="meal-prep.html"><i class="fas fa-heartbeat"></i> Meal Prep</a>
+        <a href="private-chef.html"><i class="fas fa-chef-hat"></i> Private Chef</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+
+    <!-- NAVIGATION -->
+    <nav id="mainNav">
+        <button class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-logo">Aroma Food Nest</div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Side Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+        <a href="menu.html"><i class="fas fa-utensils"></i> Menu</a>
+        <a href="packages.html"><i class="fas fa-box-open"></i> Packages</a>
+        <a href="meal-prep.html"><i class="fas fa-heartbeat"></i> Meal Prep</a>
+        <a href="private-chef.html"><i class="fas fa-chef-hat"></i> Private Chef</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+
+    <!-- Shopping Cart -->
+    <div class="cart-container" id="cartContainer">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">Your cart is empty</div>
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotal">0 AED</span>
+        </div>
+        <div class="cart-actions">
+            <button class="cta-button" id="checkoutBtn" style="width: 100%;">
+                <i class="fab fa-whatsapp"></i> Send via WhatsApp
+            </button>
+            <button class="cta-button" id="clearCartBtn" style="width: 100%; background: #f5f5f5; color: var(--accent);">
+                <i class="fas fa-trash"></i> Clear Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Button -->
+    <div class="cart-btn" id="cartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <!-- ABOUT HERO SECTION -->
+    <header style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); height: 60vh;">
+        <h1 class="logo" style="font-size: 4rem;">Our Story</h1>
+        <p class="tagline" style="font-size: 1.5rem;">"Passion for food, commitment to excellence"</p>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+        <h2 class="section-title">Who We Are</h2>
+        <div class="private-chef-content animate-on-scroll">
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                Founded in 2020, Aroma Food Nest began as a small home-based catering service with a simple mission:
+                to create memorable dining experiences through exceptional food and service. What started as a passion
+                project has grown into a premier culinary service provider in Dubai, serving families, professionals,
+                and special events across the city.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                <div style="background: var(--light); padding: 1.5rem; border-radius: 10px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 1rem;">
+                        <i class="fas fa-seedling" style="margin-right: 10px;"></i> Our Philosophy
+                    </h3>
+                    <p>We believe in using the freshest ingredients, combining global flavors with local sensibilities, and treating every meal as an opportunity to create something extraordinary.</p>
+                </div>
+                <div style="background: var(--light); padding: 1.5rem; border-radius: 10px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 1rem;">
+                        <i class="fas fa-award" style="margin-right: 10px;"></i> Our Team
+                    </h3>
+                    <p>Our chefs bring diverse culinary backgrounds with experience in Michelin-starred restaurants, boutique hotels, and private dining around the world.</p>
+                </div>
+                <div style="background: var(--light); padding: 1.5rem; border-radius: 10px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 1rem;">
+                        <i class="fas fa-heart" style="margin-right: 10px;"></i> Our Promise
+                    </h3>
+                    <p>Every dish we create is made with care, attention to detail, and a commitment to exceeding your expectations.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--dark); margin-bottom: 1.5rem;">Meet Our Founders</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                    <div>
+                        <div style="width: 150px; height: 150px; border-radius: 50%; background: #eee; margin: 0 auto 1rem; overflow: hidden;">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Founder" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h4 style="font-family: 'Playfair Display', serif;">Sarah Johnson</h4>
+                        <p style="color: var(--gold); font-weight: 600;">Executive Chef & Co-Founder</p>
+                        <p>With 15 years of culinary experience across Europe and the Middle East, Sarah brings creativity and precision to every dish.</p>
+                    </div>
+                    <div>
+                        <div style="width: 150px; height: 150px; border-radius: 50%; background: #eee; margin: 0 auto 1rem; overflow: hidden;">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Founder" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h4 style="font-family: 'Playfair Display', serif;">Michael Chen</h4>
+                        <p style="color: var(--gold); font-weight: 600;">Head of Operations & Co-Founder</p>
+                        <p>Michael's expertise in hospitality management ensures seamless service and unforgettable dining experiences.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--dark); margin-bottom: 1.5rem; text-align: center;">Our Kitchen</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                    <div style="height: 200px; background: url('https://images.unsplash.com/photo-1583778176476-4a8b02b64b1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover; border-radius: 10px;"></div>
+                    <div style="height: 200px; background: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover; border-radius: 10px;"></div>
+                    <div style="height: 200px; background: url('https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover; border-radius: 10px;"></div>
+                </div>
+                <p style="text-align: center; font-size: 1.1rem;">
+                    Our state-of-the-art kitchen facility is certified by the Dubai Municipality and adheres to the highest standards of food safety and hygiene.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" style="background: #f9f9f9;">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="cuisine-grid">
+            <div class="cuisine-card animate-on-scroll">
+                <div class="cuisine-img" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="cuisine-content">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem; color: var(--gold); margin-right: 0.5rem;">"</div>
+                        <p>The private chef experience was absolutely phenomenal. Every course was a masterpiece!</p>
+                    </div>
+                    <p style="font-weight: 600;">- Emily R.</p>
+                    <p style="font-size: 0.9rem; color: #666;">Anniversary Dinner</p>
+                </div>
+            </div>
+            <div class="cuisine-card animate-on-scroll">
+                <div class="cuisine-img" style="background-image: url('https://images.unsplash.com/photo-1562788869-4ed32648eb72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="cuisine-content">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem; color: var(--gold); margin-right: 0.5rem;">"</div>
+                        <p>Our corporate event catering was flawless. The team handled everything professionally.</p>
+                    </div>
+                    <p style="font-weight: 600;">- David M.</p>
+                    <p style="font-size: 0.9rem; color: #666;">Business Dinner</p>
+                </div>
+            </div>
+            <div class="cuisine-card animate-on-scroll">
+                <div class="cuisine-img" style="background-image: url('https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="cuisine-content">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem; color: var(--gold); margin-right: 0.5rem;">"</div>
+                        <p>The weekly meal prep has transformed our family's eating habits. Delicious and convenient!</p>
+                    </div>
+                    <p style="font-weight: 600;">- The Al-Mansoori Family</p>
+                    <p style="font-size: 0.9rem; color: #666;">Weekly Meal Prep</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION SECTION -->
+    <section id="cta" style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); background-size: cover; background-position: center; color: white; text-align: center; padding: 8rem 2rem; clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 2rem;">Ready to Experience Aroma Food Nest?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Book your culinary experience today and let us take care of the rest.</p>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="contact.html" class="cta-button">
+                    <i class="fas fa-calendar-alt"></i> Book Now
+                </a>
+                <a href="tel:+971527055642" class="cta-button" style="background: var(--dark); color: white;">
+                    <i class="fas fa-phone"></i> Call Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">Aroma Food Nest</div>
+        <p style="font-style: italic; margin-bottom: 1.5rem;">"Where every meal tells a story"</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="menu.html">Menu</a>
+            <a href="packages.html">Packages</a>
+            <a href="contact.html">Contact</a>
+            <a href="/admin">Admin</a>
+        </div>
+        <div class="social-links" style="margin: 2rem 0;">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2025 Aroma Food Nest. All rights reserved.</p>
+    </footer>
+
+    <!-- FLOATING CTA -->
+    <div class="floating-cta animate-on-scroll">
+        <a href="contact.html" class="cta-button">
+            <i class="fas fa-calendar-alt"></i> Book Now
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

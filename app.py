@@ -45,8 +45,29 @@ def admin_required(f):
 # Routes
 @app.route('/')
 def index():
+    try:
+        booked_dates = BookedDate.query.all()
+        booked_dates_str = [d.date.strftime('%Y-%m-%d') for d in booked_dates]
+        return render_template('index.html', booked_dates=booked_dates_str)
+    except Exception as e:
+        app.logger.error(f"Error fetching booked dates: {str(e)}")
+        # Return empty list if there's an error
+        return render_template('index.html', booked_dates=[])
 
-    return render_template('index.html')
+
+@app.route('/services')
+def services():
+    return render_template('services.html')
+
+
+@app.route('/menu')
+def menu():
+    return render_template('menu.html')
+
+
+@app.route('/events')
+def events():
+    return render_template('events.html')
 
 
 @app.route('/calendar')
@@ -96,7 +117,10 @@ def book_date():
         if not date_str:
             return jsonify({'success': False, 'error': 'Date is required'}), 400
 
+        # Validate date is not in the past
         date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+        if date_obj < date.today():
+            return jsonify({'success': False, 'error': 'Cannot book past dates'}), 400
 
         # Check if date is already booked
         existing = BookedDate.query.filter_by(date=date_obj).first()
